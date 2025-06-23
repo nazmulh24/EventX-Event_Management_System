@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit_Category | EventX</title>
+
+    {% include "links.html" %}
+</head>
+<body>
+    {% include "header.html" %}
+
+    <main>
+        <div class="w-1/3 mx-auto my-10 p-8 border-2 border-orange-200 bg-white shadow rounded-xl">
+          <h2 class="text-2xl font-bold text-center text-orange-600 mb-6">Edit Category</h2>
+
+          <form method="post">
+            {% csrf_token %}
+
+            <!-- Category Name -->
+            <div class="mb-4">
+              <label class="block font-semibold mb-1 text-gray-700">Category Name</label>
+              <input
+                type="text"
+                name="name"
+                value="{{ category.name }}"
+                placeholder="Category name"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400 "required />
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+                <label class="block font-semibold mb-1 text-gray-700"
+                  >Description</label
+                >
+                <textarea
+                  name="description"
+                  rows="3"
+                  placeholder="Update description..."
+                  class="w-full border text-left border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  >
+                {{ category.description }}</textarea>
+            </div>
+        
+            <!-- Button -->
+            <button
+                type="submit"
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md transition"
+              >
+                Update
+            </button>
+
+            <!-- Cancel Link -->
+            <p class="mt-4 text-center text-sm text-gray-600">
+                <a href="{% url 'category' %}" class="text-orange-500 underline">
+                    ← Cancel and go back
+                </a>
+            </p>
+          </form>
+        </div>
+    </main>
+
+    {% include "footer.html" %}
+</body>
+</html>

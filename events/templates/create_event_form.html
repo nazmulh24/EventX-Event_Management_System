@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CreateEvent | ExentX</title>
+
+    {% include "links.html" %}
+  </head>
+  <body class="max-w-[1400px] mx-auto bg-gray-50">
+    {% include "header.html" %}
+
+    <main class="my-10">
+      <div class="w-1/2 mx-auto bg-white shadow-lg rounded-xl p-8">
+        <h2 class="text-2xl font-bold text-center text-orange-600 mb-6">
+          Create New Event
+        </h2>
+
+        <!-- Message -->
+        <div class="w-1/2 mx-auto">
+          {% if message %}
+            <p class="bg-rose-100 rounded-md p-1 text-center">{{message}}</p>
+          {% endif %}
+        </div>
+
+        <!-- Form -->
+        <form method="POST" class="space-y-3">
+          {% csrf_token %}
+        
+          <!-- Event Name -->
+          <div>
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {{ form.name.errors }}
+          </div>
+        
+          <!-- Description -->
+          <div>
+            {{ form.description.label_tag }}
+            {{ form.description }}
+            {{ form.description.errors }}
+          </div>
+        
+          <!-- Date & Time Side by Side -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              {{ form.date.label_tag }}
+              {{ form.date }}
+              {{ form.date.errors }}
+            </div>
+            <div>
+              {{ form.time.label_tag }}
+              {{ form.time }}
+              {{ form.time.errors }}
+            </div>
+          </div>
+        
+          <!-- Location -->
+          <div>
+            {{ form.location.label_tag }}
+            {{ form.location }}
+            {{ form.location.errors }}
+          </div>
+        
+          <!-- Category -->
+          <div>
+            {{ form.category.label_tag }}
+            {{ form.category }}
+            {{ form.category.errors }}
+          </div>
+        
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md transition"
+            >
+            Create Event
+          </button>
+  
+          <!-- Cancel or Back -->
+          <p class="mt-4 text-center text-sm text-gray-600">
+            <a href="{% url 'event' %}" class="text-orange-500 underline"
+              >← Back to Events</a
+            >
+          </p>
+        </form>
+      </div>
+    </main>
+
+    {% include "footer.html" %}
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<footer class="bg-black text-gray-400 pt-12 px-4 sm:px-8 md:px-20">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-10 border-b border-gray-700">
+    <!-- Logo & Description -->
+    <div>
+      <h2 class="text-2xl font-bold text-white">
+        <span class="text-orange-600">Event</span>X
+      </h2>
+      <p class="mt-4 text-sm leading-6">
+        Discover, create, and participate in events around you.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-white font-semibold mb-3">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="{% url 'home' %}" class="hover:text-white">Home</a></li>
+        <li><a href="{% url 'dashboard' %}" class="hover:text-white">Dashboard</a></li>
+        <li><a href="{% url 'event' %}" class="hover:text-white">Events</a></li>
+        <li><a href="{% url 'about_us' %}" class="hover:text-white">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal -->
+    <div>
+      <h3 class="text-white font-semibold mb-3">Legal</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+        <li><a href="#" class="hover:text-white">Cookie Policy</a></li>
+      </ul>
+    </div>
+
+    <!-- Social & Newsletter -->
+    <div>
+      <h3 class="text-white font-semibold mb-3">Connect With Us</h3>
+      <div class="flex space-x-4 mb-4 text-xl">
+        <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <p class="text-sm mb-2">Subscribe to our newsletter</p>
+      <form class="flex flex-col sm:flex-row gap-2">
+        <input
+          type="email"
+          placeholder="Your email"
+          class="px-4 py-2 bg-gray-800 text-white rounded-md w-full text-sm focus:outline-none"
+        />
+        <button
+          type="submit"
+          class="bg-white text-black px-4 py-2 rounded-md text-sm hover:bg-gray-200"
+        >
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom Footer -->
+  <div class="text-center text-sm text-gray-500 py-6">
+    © 2025 EventX. All rights reserved.
+  </div>
+</footer>

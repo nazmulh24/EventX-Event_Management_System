@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit_Participant | EventX</title>
+
+    {% include "links.html" %}
+</head>
+<body>
+    {% include "header.html" %}
+
+    <main>
+        <div class="w-1/2 mx-auto my-10 p-8 border-2 border-orange-200 bg-white shadow rounded-xl">
+          <h2 class="text-2xl font-bold text-center text-orange-600 mb-6">Edit Participant</h2>
+
+          <form method="post" class="space-y-5">
+            {% csrf_token %}
+
+            <!-- Name -->
+            <div>
+                <label class="block text-lg font-semibold text-gray-700">Full Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value="{{ participant.name }}"
+                  placeholder="Enter Full name"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  required
+                />
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block text-lg font-medium text-gray-700 mb-1">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value="{{ participant.email }}"
+                  placeholder="xxxxxx@example.com"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  required
+                />
+            </div>
+
+            <!-- Select Events -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Associated Event(s)</label>
+                <select
+                  name="events"
+                  rows="5"
+                  multiple
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  >
+                    {% for event in events %}
+                        <option 
+                          value="{{ event.id }}"
+                          {% if event in participant.events.all %}selected{% endif %}
+                          >
+                            {{ event.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <p class="text-sm text-gray-500 mt-1">
+                  Hold Ctrl (Windows) or Cmd (Mac) to update multiple events.
+                </p>
+            </div>
+        
+            <!-- Button -->
+            <button
+                type="submit"
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md transition"
+              >
+                Update
+            </button>
+
+            <!-- Cancel Link -->
+            <p class="mt-4 text-center text-sm text-gray-600">
+                <a href="{% url 'participant' %}" class="text-orange-500 underline">
+                    ← Cancel and go back
+                </a>
+            </p>
+          </form>
+    
+        </div>
+    </main>
+
+    {% include "footer.html" %}
+</body>
+</html>

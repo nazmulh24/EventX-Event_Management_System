@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About_Us | EventX</title>
+    {% include "links.html" %}
+</head>
+<body>
+    {% include "header.html" %}
+
+    <main class="flex justify-center px-4 py-10">
+        <div class="max-w-5xl bg-white shadow-lg rounded-xl p-8 space-y-6 text-center">
+          <h1 class="text-3xl font-bold text-gray-800">About EventX</h1>
+      
+          <p class="text-gray-700 text-lg">
+            Welcome to <span class="font-semibold text-green-600">EventX</span> — your go-to platform for seamless event organization and participation. Whether you're planning a workshop, seminar, cultural fest, or academic competition, EventX simplifies every step from creation to participation.
+          </p>
+      
+          <p class="text-gray-700">
+            Our system allows organizers to effortlessly manage events, categories, and participant registrations, while attendees can explore and join events based on interests, categories, and schedules. We prioritize simplicity, clarity, and reliability.
+          </p>
+      
+          <p class="text-gray-700 font-semibold">Key features include:</p>
+          <ul class="list-disc text-left pl-6 text-gray-700 max-w-xl mx-auto">
+            <li>Dynamic event filtering by date, type, category, and keyword</li>
+            <li>Real-time participant tracking and available seat calculation</li>
+            <li>User-friendly forms for creating and editing events</li>
+            <li>Clean, responsive UI powered by Tailwind CSS</li>
+          </ul>
+      
+          <p class="text-gray-700">
+            Built with <span class="font-medium text-blue-600">Django</span> for performance and security, and <span class="font-medium text-indigo-600">Tailwind CSS</span> for modern UI design, our system supports both small-scale and large-scale events with ease.
+          </p>
+      
+          <p class="text-gray-700">
+            Thank you for using EventX. We’re constantly working to improve and expand our features to better support your event experiences.
+          </p>
+      
+          <p class="text-sm text-gray-500 italic">— Nazmul,  EventX Development Team</p>
+        </div>
+    </main>
+
+    {% include "footer.html" %}
+</body>
+</html>
