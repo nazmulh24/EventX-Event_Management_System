@@ -38,7 +38,7 @@ urlpatterns = [
     path("delete-category/<int:id>/", delete_category, name="delete_category"),
     #
     path("view-participant/", view_participant, name="participant"),
-    path("add-participant/", add_participant, name="add_participant"),
+    # path("add-participant/", add_participant, name="add_participant"),
     path("edit-participant/<int:id>/", edit_participant, name="edit_participant"),
     path("delate-participant/<int:id>/", delate_participant, name="delate_participant"),
     #

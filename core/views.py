@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 
 # from django.http import HttpResponse
 # from events.forms import EventForm, CategoryForm, ParticipantForm, JoinEventForm
-from events.models import Event, Category, Participant
+from events.models import Event, Category
 
 from django.utils import timezone
 from django.db.models import Q, Count
@@ -56,3 +56,15 @@ def about_us(request):
 
 def no_permission(request):
     return render(request, "no_permission.html")
+
+
+def is_admin(user):
+    return user.groups.filter(name="Admin").exists()
+
+
+def is_organizer(user):
+    return user.groups.filter(name="Organizer").exists()
+
+
+def is_participant(user):
+    return user.groups.filter(name="Participant").exists()

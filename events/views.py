@@ -2,53 +2,20 @@ from django.db import IntegrityError
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
 from events.forms import EventForm, CategoryForm, ParticipantForm, JoinEventForm
-from events.models import Event, Category, Participant
+from events.models import Event, Category
 
 from django.utils import timezone
 from django.db.models import Q, Count
 from django.utils.timezone import make_aware
 from datetime import datetime
 
-
-def home_view(request):
-    now = timezone.now()
-
-    upcoming_events = Event.objects.filter(
-        Q(date__gt=now.date()) | Q(date=now.date(), time__gte=now.time())
-    ).order_by("date", "time")[:3]
-
-    next_event = (
-        Event.objects.filter(
-            Q(date__gt=now.date()) | Q(date=now.date(), time__gte=now.time())
-        )
-        .order_by("date", "time")
-        .first()
-    )
-
-    days = hours = minutes = seconds = None
-
-    if next_event:
-        event_datetime = make_aware(datetime.combine(next_event.date, next_event.time))
-        time_left = event_datetime - now
-
-        total_seconds = int(time_left.total_seconds())
-        days = total_seconds // 86400
-        hours = (total_seconds % 86400) // 3600
-        minutes = (total_seconds % 3600) // 60
-        seconds = total_seconds % 60
-
-    context = {
-        "upcoming_events": upcoming_events,
-        "next_event": next_event,
-        "days": days,
-        "hours": hours,
-        "minutes": minutes,
-        "seconds": seconds,
-    }
-
-    return render(request, "home.html", context)
+from django.contrib.auth.decorators import user_passes_test
+from core.views import is_admin, is_organizer, is_participant
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 
+@user_passes_test(is_organizer, login_url="no-permission")
 def create_event(request):
     if request.method == "POST":
         form = EventForm(request.POST)
@@ -63,44 +30,58 @@ def create_event(request):
     return render(request, "create_event_form.html", context)
 
 
+# def join_event(request, id):
+#     event = get_object_or_404(Event, pk=id)
+#     message = None
+
+#     if request.method == "POST":
+#         name = request.POST.get("name")
+#         email = request.POST.get("email")
+
+#         if name and email:
+#             try:
+#                 participant = Participant.objects.get(email=email)
+#                 if participant not in event.participants.all():
+#                     event.participants.add(participant)
+#                     message = "You have successfully joined the event!"
+#                 else:
+#                     message = "You already joined this event."
+#             except Participant.DoesNotExist:
+#                 participant = Participant.objects.create(name=name, email=email)
+#                 event.participants.add(participant)
+#                 message = "You have been registered and joined the event!"
+
+#         else:
+#             message = "Please provide both name and email."
+
+#     return render(
+#         request,
+#         "join_event_form.html",
+#         {
+#             "event": event,
+#             "message": message,
+#         },
+#     )
+
+
 def join_event(request, id):
     event = get_object_or_404(Event, pk=id)
-    message = None
 
-    if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
+    if request.user in event.participants.all():
+        messages.info(request, "You have already joined this event.")
+    else:
+        event.participants.add(request.user)
+        messages.success(request, "You have successfully joined the event!")
 
-        if name and email:
-            try:
-                participant = Participant.objects.get(email=email)
-                if participant not in event.participants.all():
-                    event.participants.add(participant)
-                    message = "You have successfully joined the event!"
-                else:
-                    message = "You already joined this event."
-            except Participant.DoesNotExist:
-                participant = Participant.objects.create(name=name, email=email)
-                event.participants.add(participant)
-                message = "You have been registered and joined the event!"
-
-        else:
-            message = "Please provide both name and email."
-
-    return render(
-        request,
-        "join_event_form.html",
-        {
-            "event": event,
-            "message": message,
-        },
-    )
+    return redirect("event-details", id=id)  # Replace with your actual detail view name
 
 
+@user_passes_test(is_organizer, login_url="no-permission")
 def dashboard_view(request):
     type = request.GET.get("type", "today_event")
 
-    participants = Participant.objects.count()
+    # participants = Participant.objects.count()
+    participants = User.objects.filter(groups__name="Participant").count()
     events = Event.objects.all()
 
     now = timezone.now()
@@ -316,13 +297,15 @@ def delete_category(request, id):
 def view_participant(request):
     query = request.GET.get("q", "")
 
-    # participants = Participant.objects.all()
-    participants = Participant.objects.prefetch_related("events").all()
+    # participants = User.objects.filter(groups__name="Participant").prefetch_related(
+    #     "joined_events"
+    # )
+    participants = User.objects.prefetch_related("events")
 
     total_participants = participants.count()
 
     if query:
-        participants = Participant.objects.filter(name__icontains=query)
+        participants = participants.filter(first_name__icontains=query)
 
     return render(
         request,
@@ -364,7 +347,7 @@ def add_participant(request):
 
 
 def edit_participant(request, id):
-    participant = get_object_or_404(Participant, id=id)
+    participant = get_object_or_404(User, id=id)
     events = Event.objects.all()
 
     if request.method == "POST":
@@ -384,12 +367,10 @@ def edit_participant(request, id):
         },
     )
 
-
 def delate_participant(request, id):
-    participant = get_object_or_404(Participant, id=id)
+    participant = get_object_or_404(User, id=id)
 
     participant.delete()
     return redirect("participant")
-
 
 #

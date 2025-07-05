@@ -1,5 +1,6 @@
 from django import forms
-from events.models import Event, Participant, Category
+from events.models import Event, Category
+from django.contrib.auth.models import User
 
 
 class StyleFormMixin:
@@ -86,14 +87,14 @@ class ParticipantForm(StyleFormMixin, forms.ModelForm):
     )
 
     class Meta:
-        model = Participant
-        fields = ["name", "email", "events"]
+        model = User
+        fields = ["first_name", "last_name", "email", "events"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.apply_styled_widgets()
         if self.instance.pk:
-            self.fields["events"].initial = self.instance.events.all()
+            self.fields["events"].initial = self.instance.joined_events.all()
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -103,16 +104,16 @@ class ParticipantForm(StyleFormMixin, forms.ModelForm):
         return instance
 
     def save_m2m(self):
-        self.instance.events.set(self.cleaned_data["events"])
+        self.instance.joined_events.set(self.cleaned_data["events"])
 
 
 class JoinEventForm(StyleFormMixin, forms.ModelForm):
     class Meta:
-        model = Participant
-        fields = ["name", "email"]
+        model = User
+        fields = ["first_name", "last_name", "email"]
 
     def clean_email(self):
-        return self.cleaned_data["email"]  # allow existing
+        return self.cleaned_data["email"]  # allow existing user email
 
 
 class CategoryForm(StyleFormMixin, forms.ModelForm):
