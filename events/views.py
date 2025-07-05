@@ -392,8 +392,4 @@ def delate_participant(request, id):
     return redirect("participant")
 
 
-def about_us(request):
-    return render(request, "about_us.html")
-
-
 #

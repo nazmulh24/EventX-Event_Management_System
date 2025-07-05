@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "events",  # --> app for managing events
     "debug_toolbar",  # --> Debug toolbar for development
+    "events",  # --> app for managing events
+    "users",
+    "core",
 ]
 
 MIDDLEWARE = [
@@ -87,22 +89,22 @@ WSGI_APPLICATION = "event_management.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # --> For postgres
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "event_management",
-#         "USER": "postgres",
-#         "PASSWORD": "1qaz0plm",
-#         "HOST": "localhost",
-#         "PORT": "5432",
-#     }
-# }
 DATABASES = {
-    "default": dj_database_url.config(
-        default="postgresql://eventx_db_nao0_user:cqMO7mDMpPBtGE27yLfuaaUFP5TQev7k@dpg-d1cpa6re5dus73a5o4og-a.oregon-postgres.render.com/eventx_db_nao0",
-        conn_max_age=600,
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "event_management",
+        "USER": "postgres",
+        "PASSWORD": "1qaz0plm",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
 }
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default="postgresql://eventx_db_nao0_user:cqMO7mDMpPBtGE27yLfuaaUFP5TQev7k@dpg-d1cpa6re5dus73a5o4og-a.oregon-postgres.render.com/eventx_db_nao0",
+#         conn_max_age=600,
+#     )
+# }
 
 
 # Password validation

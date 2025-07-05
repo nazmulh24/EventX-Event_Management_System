@@ -1,7 +1,6 @@
 from django.urls import path
 
 from events.views import (
-    # home_view,
     create_event,
     join_event,
     dashboard_view,
@@ -18,12 +17,10 @@ from events.views import (
     add_participant,
     edit_participant,
     delate_participant,
-    about_us,
 )
 
 
 urlpatterns = [
-    # path("home/", home_view, name="home"),
     path("create-event/", create_event, name="create_event"),
     path("join-event/<int:id>/", join_event, name="join_event"),  # --> Join Event...
     #
@@ -45,5 +42,4 @@ urlpatterns = [
     path("edit-participant/<int:id>/", edit_participant, name="edit_participant"),
     path("delate-participant/<int:id>/", delate_participant, name="delate_participant"),
     #
-    path("about-us/", about_us, name="about_us"),
 ]

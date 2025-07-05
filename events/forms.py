@@ -3,6 +3,10 @@ from events.models import Event, Participant, Category
 
 
 class StyleFormMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.apply_styled_widgets()
+
     default_classes = "w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-400 bg-gray-50"
 
     def apply_styled_widgets(self):
@@ -75,10 +79,6 @@ class EventForm(StyleFormMixin, forms.ModelForm):
             "time": forms.TimeInput(attrs={"type": "time"}),
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.apply_styled_widgets()
-
 
 class ParticipantForm(StyleFormMixin, forms.ModelForm):
     events = forms.ModelMultipleChoiceField(
@@ -111,10 +111,6 @@ class JoinEventForm(StyleFormMixin, forms.ModelForm):
         model = Participant
         fields = ["name", "email"]
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.apply_styled_widgets()
-
     def clean_email(self):
         return self.cleaned_data["email"]  # allow existing
 
@@ -123,7 +119,3 @@ class CategoryForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Category
         fields = ["name", "description"]
-
-    def __init__(self, *arg, **kwarg):
-        super().__init__(*arg, **kwarg)
-        self.apply_styled_widgets()
