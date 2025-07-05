@@ -86,6 +86,7 @@ WSGI_APPLICATION = "event_management.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# --> For postgres
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
@@ -97,9 +98,9 @@ WSGI_APPLICATION = "event_management.wsgi.application"
 #     }
 # }
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://eventx_db_nao0_user:cqMO7mDMpPBtGE27yLfuaaUFP5TQev7k@dpg-d1cpa6re5dus73a5o4og-a.oregon-postgres.render.com/eventx_db_nao0',
-        conn_max_age=600
+    "default": dj_database_url.config(
+        default="postgresql://eventx_db_nao0_user:cqMO7mDMpPBtGE27yLfuaaUFP5TQev7k@dpg-d1cpa6re5dus73a5o4og-a.oregon-postgres.render.com/eventx_db_nao0",
+        conn_max_age=600,
     )
 }
 
