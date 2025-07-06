@@ -1,0 +1,242 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin-Dashboard | EventX</title>
+
+    {% include "links.html" %}
+  </head>
+  <body class="max-w-[1400px] mx-auto bg-gray-50">
+    {% include "header.html" %}
+
+    <main class="px-6 py-10">
+      <!-- Top Section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 my-15">
+        <!-- Total Perticipants -->
+        <div
+          class="bg-white rounded-xl shadow-lg p-7 hover:shadow-xl hover:scale-105 transition-all duration-300"
+          >
+          <h3 class="text-xl font-bold text-gray-700 mb-7 text-center">
+            Total Participants
+          </h3>
+          <div
+            class="flex flex-col items-center bg-blue-100 rounded-full w-28 h-28 justify-center mx-auto mb-3 p-2 gap-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.8"
+              stroke="currentColor"
+              class="w-7 h-7 text-blue-700"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
+              />
+            </svg>
+            <h2 class="text-2xl font-semibold text-blue-700">{{participants}}</h2>
+          </div>
+          <p class="text-center text-sm text-gray-500 mt-5">6 last month</p>
+        </div>
+
+        <!-- Total Events -->
+      <a href="{% url 'dashboard' %}?type=total_event">
+        <div
+          class="bg-white rounded-xl shadow-lg p-7 hover:shadow-xl hover:scale-105 transition-all duration-300"
+          >
+          <h3 class="text-xl font-bold text-gray-700 mb-7 text-center">
+            Total Events
+          </h3>
+          <div
+            class="flex flex-col items-center bg-violet-100 rounded-full w-28 h-28 justify-center mx-auto mb-3 p-2 gap-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.8"
+              stroke="currentColor"
+              class="w-7 h-7 text-violet-700"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"
+              />
+            </svg>
+            <h2 class="text-2xl font-semibold text-violet-700">{{counts.total_event}}</h2>
+          </div>
+          <p class="text-center text-sm text-gray-500 mt-5">6 last month</p>
+        </div>
+      </a>
+
+        <!-- Upcoming Events -->
+      <a href="?type=upcoming_event">
+        <div
+          class="bg-white rounded-xl shadow-lg p-7 hover:shadow-xl hover:scale-105 transition-all duration-300"
+          >
+          <h3 class="text-xl font-bold text-gray-700 mb-7 text-center">
+            Upcoming Events
+          </h3>
+          <div
+            class="flex flex-col items-center bg-emerald-100 rounded-full w-28 h-28 justify-center mx-auto mb-3 p-2 gap-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.8"
+              stroke="currentColor"
+              class="w-7 h-7 text-emerald-700"
+            >
+              <g transform="rotate(-15 12 12)">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18
+                  c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845
+                  0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0
+                  1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91
+                  23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0
+                  1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46"
+                />
+              </g>
+            </svg>
+            <h2 class="text-2xl font-semibold text-emerald-700">{{counts.upcoming_event}}</h2>
+          </div>
+          <p class="text-center text-sm text-gray-500 mt-5">6 last month</p>
+        </div>
+      </a>
+
+        <!-- Past Events -->
+      <a href="?type=past_event">
+        <div
+          class="bg-white rounded-xl shadow-lg p-7 hover:shadow-xl hover:scale-105 transition-all duration-300"
+          >
+          <h3 class="text-xl font-bold text-gray-700 mb-7 text-center">
+            Past Events
+          </h3>
+          <div
+            class="flex flex-col items-center bg-rose-100 rounded-full w-28 h-28 justify-center mx-auto mb-3 p-2 gap-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.8"
+              stroke="currentColor"
+              class="w-7 h-7 text-rose-700"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6v6l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <h2 class="text-2xl font-semibold text-rose-700">{{counts.past_event}}</h2>
+          </div>
+          <p class="text-center text-sm text-gray-500 mt-5">6 last month</p>
+        </div>
+      </a>
+      </div>
+
+      <!-- Bottom Section -->
+      <div class="my-20">
+        <h2 class="text-5xl font-bold text-gray-700 mb-7 text-center">
+          {{title}}
+        </h2>
+
+        {% if events %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+          {% for event in events %}
+            <div class="relative group bg-white rounded-xl shadow-lg flex flex-col">
+
+              <div class="relative overflow-hidden rounded-t-xl">
+                <img
+                  src="{% static 'images/event.jpeg' %}"
+                  alt="Event_img"
+                  class="w-full h-48 object-cover transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-xl"
+                />
+                {% if event.date != today_date %}
+                  <div
+                    class="absolute top-2 left-2 w-14 h-14 rounded-lg p-1 backdrop-blur-md bg-orange-200/80 text-gray-800 flex flex-col items-center justify-center text-md font-semibold"
+                  >
+                    <p>{{ event.date|date:"d" }}</p>
+                    <p>{{ event.date|date:"M" }}</p>
+                  </div>
+                {% endif %}
+              </div>
+        
+              <div class="p-3 flex-grow">
+                <h3 class="text-md font-semibold mb-3">
+                  {{ event.name|slice:":30" }}{% if event.name|length > 30 %}...{% endif %}
+                </h3>
+
+                <div class="space-y-2 px-2 text-md">
+                  <div class="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                      <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="font-medium text-gray-700 pr-2">Time :</span>
+                    <p>{{ event.time }}</p>
+                  </div>
+                
+                  <div class="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                      <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="font-medium text-gray-700 pr-2">Location :</span>
+                    <p>{{ event.location|slice:":14" }}{% if event.location|length > 14 %}...{% endif %}</p>
+                  </div>
+                
+                  <div class="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                      <path fill-rule="evenodd" d="M1.5 6.375c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v3.026a.75.75 0 0 1-.375.65 2.249 2.249 0 0 0 0 3.898.75.75 0 0 1 .375.65v3.026c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 0 1 1.5 17.625v-3.026a.75.75 0 0 1 .374-.65 2.249 2.249 0 0 0 0-3.898.75.75 0 0 1-.374-.65V6.375Zm15-1.125a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0V6a.75.75 0 0 1 .75-.75Zm.75 4.5a.75.75 0 0 0-1.5 0v.75a.75.75 0 0 0 1.5 0v-.75Zm-.75 3a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0v-.75a.75.75 0 0 1 .75-.75Zm.75 4.5a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-.75ZM6 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 12Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="font-medium text-gray-700 pr-2">Seats :</span>
+                    <p>{{ event.available_seats }}</p>
+                  </div>
+                </div>
+              </div>
+        
+              <div class="px-5 space-y-2">
+                <!-- View Details Button -->
+                <a href="{% url 'eDetails_D' event.id %}" 
+                   class="block w-full text-center bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 rounded-md transition">
+                  View Details
+                </a>
+              </div>
+
+              <div class="flex justify-center items-center gap-4 p-4">
+                <!-- Edit Button -->
+                <a href="{% url 'edit_event' event.id %}" 
+                   class="px-4 py-2 text-sm font-semibold bg-yellow-500 hover:bg-yellow-600 text-white rounded-md transition">
+                  Edit
+                </a>
+              
+                <!-- Delete Button -->
+                <form method="POST" action="{% url 'delete_event' event.id %}" onsubmit="return confirm('Are you sure?')">
+                  {% csrf_token %}
+                  <button type="submit" 
+                          class="px-4 py-2 text-sm font-semibold text-white bg-red-500 hover:bg-red-600 rounded-md transition">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        {% else %}
+          <p class="text-gray-500 text-lg text-center">Sorry, No Event Found !!!</p>
+        {% endif %}
+      </div>
+    </main>
+
+    {% include "footer.html" %}
+  </body>
+</html>

@@ -49,6 +49,12 @@ class StyleFormMixin:
                         "class": self.default_classes,
                     }
                 )
+            elif isinstance(widget, forms.CheckboxSelectMultiple):
+                field.widget.attrs.update(
+                    {
+                        "class": f"{self.default_classes} space-y-2",
+                    }
+                )
             elif isinstance(widget, forms.DateInput):
                 widget.attrs.update(
                     {

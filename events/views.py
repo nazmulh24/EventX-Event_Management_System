@@ -76,7 +76,7 @@ def join_event(request, id):
     return redirect("event-details", id=id)  # Replace with your actual detail view name
 
 
-@user_passes_test(is_organizer, login_url="no-permission")
+# @user_passes_test(is_organizer, login_url="no-permission")
 def dashboard_view(request):
     type = request.GET.get("type", "today_event")
 
