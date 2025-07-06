@@ -1,7 +1,14 @@
 from django.db import IntegrityError
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
-from events.forms import EventForm, CategoryForm, ParticipantForm, JoinEventForm
+from events.forms import (
+    EventForm,
+    CategoryForm,
+    ParticipantForm,
+    JoinEventForm,
+    AddParticipantForm,
+    EditParticipantForm,
+)
 from events.models import Event, Category
 
 from django.utils import timezone
@@ -20,8 +27,15 @@ def create_event(request):
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
-            form.save()
-            context = {"form": form, "message": "Event Created Successfully !!!"}
+            event = form.save(commit=False)
+            event.creator = request.user
+            event.save()
+            form.save_m2m()
+
+            context = {
+                "form": EventForm(),
+                "message": "Event Created Successfully!",
+            }
             return render(request, "create_event_form.html", context)
     else:
         form = EventForm()
@@ -158,7 +172,7 @@ def edit_event(request, id):
             event.category = get_object_or_404(Category, id=category_id)
 
         event.save()
-        return redirect("event")
+        return redirect("dashboard")
 
     return render(
         request,
@@ -297,15 +311,12 @@ def delete_category(request, id):
 def view_participant(request):
     query = request.GET.get("q", "")
 
-    # participants = User.objects.filter(groups__name="Participant").prefetch_related(
-    #     "joined_events"
-    # )
     participants = User.objects.prefetch_related("events")
 
     total_participants = participants.count()
 
     if query:
-        participants = participants.filter(first_name__icontains=query)
+        participants = participants.filter(username__icontains=query)
 
     return render(
         request,
@@ -318,59 +329,57 @@ def view_participant(request):
 
 
 def add_participant(request):
-    events = Event.objects.all()
-
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        selected_event_ids = request.POST.getlist("events")
+        form = AddParticipantForm(request.POST)
+        if form.is_valid():
+            try:
+                user = User.objects.create_user(
+                    username=form.cleaned_data["username"],
+                    email=form.cleaned_data["email"],
+                    first_name=form.cleaned_data["first_name"],
+                    last_name=form.cleaned_data["last_name"],
+                    password=form.cleaned_data["password"],
+                )
+                group = form.cleaned_data["group"]
+                user.groups.add(group)
 
-        try:
-            participant = Participant.objects.create(name=name, email=email)
-            participant.events.set(selected_event_ids)
-            context = {
-                "message": "Participant added successfully !!!",
-                "events": events,
-            }
-        except IntegrityError:
-            context = {
-                "message": "Same email already exists !",
-                "events": events,
-            }
-        return render(request, "add_participant_form.html", context)
+                messages.success(request, "Participant created successfully.")
+                return redirect("participant")
+            except IntegrityError:
+                messages.error(request, "Username or email already exists.")
+    else:
+        form = AddParticipantForm()
 
-    return render(
-        request,
-        "add_participant_form.html",
-        {"events": events},
-    )
+    return render(request, "add_participant_form.html", {"form": form})
 
 
 def edit_participant(request, id):
     participant = get_object_or_404(User, id=id)
-    events = Event.objects.all()
-
     if request.method == "POST":
-        participant.name = request.POST.get("name")
-        participant.email = request.POST.get("email")
-        selected_event_ids = request.POST.getlist("events")
-        participant.save()
-        participant.events.set(selected_event_ids)
-        return redirect("participant")
+        form = EditParticipantForm(request.POST, instance=participant)
+        if form.is_valid():
+            user = form.save()
+            user.events.set(form.cleaned_data["events"])
+            return redirect("participant")
+    else:
+        initial = {"events": participant.events.all()}
+        form = EditParticipantForm(instance=participant, initial=initial)
 
     return render(
         request,
         "edit_participant.html",
         {
+            "form": form,
             "participant": participant,
-            "events": events,
         },
     )
+
 
 def delate_participant(request, id):
     participant = get_object_or_404(User, id=id)
 
     participant.delete()
     return redirect("participant")
+
 
 #

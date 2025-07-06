@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organizer-Dashboard | EventX</title>
+
+    {% include "links.html" %}
+  </head>
+  <body class="max-w-[1400px] mx-auto bg-gray-50">
+    {% include "header.html" %}
+
+    <main class="max-w-6xl mx-auto py-10">
+      <h2 class="text-4xl font-bold text-orange-600 text-center mb-6">Organizer Dashboard</h2>
+    
+      {% if events %}
+        <div class="overflow-x-auto bg-white shadow rounded-lg border border-gray-200">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">Name</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">Category</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">Date</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">Time</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">Participants</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">Available Seats</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100">
+              {% for event in events %}
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-3">
+                    <a href="{% url 'eDetails_D' event.id %}" class="hover:underline">{{ event.name }}</a>
+                  </td>
+                  <td class="px-4 py-3">{{ event.category.name }}</td>
+                  <td class="px-4 py-3">{{ event.date }}</td>
+                  <td class="px-4 py-3">{{ event.time }}</td>
+                  <td class="px-4 py-3">{{ event.total_participants }}</td>
+                  <td class="px-4 py-3">{{ event.available_seats }}</td>
+                  
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="text-center text-gray-600 text-lg mt-8">You haven't created any events yet.</p>
+      {% endif %}
+    </main>
+
+    {% include "footer.html" %}
+  </body>
+</html>

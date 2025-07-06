@@ -187,7 +187,7 @@
                 <tbody>
                   {% for participant in events.participants.all %}
                   <tr class="hover:bg-gray-50">
-                    <td class="border border-gray-300 px-4 py-2">{{ participant.name }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ participant.first_name }} {{ participant.last_name }}</td>
                     <td class="border border-gray-300 px-4 py-2">
                       <a href="mailto:{{ participant.email }}" class="underline hover:text-red-500">
                         {{ participant.email }}

@@ -27,8 +27,9 @@
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center space-x-6 text-lg text-gray-700">
           <a href="{% url 'home' %}" class="hover:text-orange-600 font-medium">Home</a>
-          <a href="{% url 'dashboard' %}" class="hover:text-orange-600 font-medium">Dashboard</a>
+          <a href="{% url 'organizer-dashboard' %}" class="hover:text-orange-600 font-medium">Dashboard</a>
           <a href="{% url 'event' %}" class="hover:text-orange-600 font-medium">Events</a>
+          <a href="{% url 'create_event' %}" class="hover:text-orange-600 font-medium">Create Event</a>
           <a href="{% url 'category' %}" class="hover:text-orange-600 font-medium">Categories</a>
 
           <div class="flex items-center">
@@ -53,7 +54,7 @@
                 class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden"
               >
                 <a
-                  href="{% url 'dashboard' %}"
+                  href="{% url 'organizer-dashboard' %}"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                   Dashboard
                 </a>
@@ -97,8 +98,9 @@
       class="md:hidden hidden px-4 pb-4 pt-2 bg-gray-100 border-t border-orange-300 transition-all duration-300 ease-in-out"
       >
       <a href="{% url 'home' %}" class="block py-2 hover:text-orange-600">Home</a>
-      <a href="{% url 'dashboard' %}" class="block py-2 hover:text-orange-600">Dashboard</a>
+      <a href="{% url 'organizer-dashboard' %}" class="block py-2 hover:text-orange-600">Dashboard</a>
       <a href="{% url 'event' %}" class="block py-2 hover:text-orange-600">Events</a>
+      <a href="{% url 'create_event' %}" class="block py-2 hover:text-orange-600">Create Event</a>
       <a href="{% url 'category' %}" class="block py-2 hover:text-orange-600">Categories</a>
     </div>
   </nav>

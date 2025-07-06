@@ -9,6 +9,7 @@ from users.views import (
     create_group,
     assign_role,
     view_role,
+    organizer_dashboard,
 )
 
 urlpatterns = [
@@ -21,4 +22,5 @@ urlpatterns = [
     path("admin/create-group/", create_group, name="create-group"),
     path("admin/<int:user_id>/assign-role/", assign_role, name="assign-role"),
     path("admin/view-role/", view_role, name="view-role"),
+    path("organizer/dashboard/", organizer_dashboard, name="organizer-dashboard"),
 ]

@@ -1,6 +1,7 @@
 from django import forms
 from events.models import Event, Category
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
+from django.core.exceptions import ValidationError
 
 
 class StyleFormMixin:
@@ -126,3 +127,68 @@ class CategoryForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Category
         fields = ["name", "description"]
+
+
+class AddParticipantForm(StyleFormMixin, forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput(), label="Password")
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(), label="Confirm Password"
+    )
+
+    group = forms.ModelChoiceField(
+        queryset=Group.objects.all(),
+        required=True,
+        label="Role",
+        empty_label="Select Role",
+    )
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "password",
+            "confirm_password",
+            "group",
+        ]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm = cleaned_data.get("confirm_password")
+
+        if password and confirm and password != confirm:
+            raise ValidationError("Passwords do not match")
+
+
+class EditParticipantForm(StyleFormMixin, forms.ModelForm):
+    events = forms.ModelMultipleChoiceField(
+        queryset=Event.objects.all(),
+        widget=forms.SelectMultiple(),
+        required=False,
+        label="Associated Events",
+    )
+    role = forms.ModelChoiceField(
+        queryset=Group.objects.all(),
+        required=False,
+        label="Role",
+        empty_label="Select Role",
+        widget=forms.Select(
+            attrs={
+                "class": "w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400",
+            }
+        ),
+    )
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "role",
+            "events",
+        ]

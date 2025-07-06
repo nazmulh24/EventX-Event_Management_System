@@ -187,7 +187,7 @@ def create_group(request):
             messages.success(
                 request, f"Group {group.name} has been created successfully.."
             )
-            return redirect("create-group")
+            return redirect("group-list")
 
     return render(request, "admin/create_group.html", {"form": form})
 
@@ -197,3 +197,21 @@ def group_list(request):
     groups = Group.objects.prefetch_related("permissions").all()
 
     return render(request, "admin/group_list.html", {"groups": groups})
+
+
+from django.contrib.auth.decorators import login_required
+from events.models import Event
+
+
+@login_required
+def organizer_dashboard(request):
+    user = request.user
+    events = Event.objects.filter(creator=user).order_by("-date")
+
+    return render(
+        request,
+        "organizer/organizer_dashboard.html",
+        {
+            "events": events,
+        },
+    )

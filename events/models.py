@@ -30,6 +30,10 @@ class Event(models.Model):
         blank=True,
     )
 
+    creator = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="created_events"
+    )
+
     def __str__(self):
         return f"{self.name}"
 
@@ -41,4 +45,3 @@ class Event(models.Model):
     def available_seats(self):
         MAX_SEATS = 45
         return MAX_SEATS - self.total_participants
-
