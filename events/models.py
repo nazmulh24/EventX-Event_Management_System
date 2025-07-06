@@ -34,6 +34,13 @@ class Event(models.Model):
         User, on_delete=models.CASCADE, related_name="created_events"
     )
 
+    asset = models.ImageField(
+        upload_to="event_asset",
+        blank=True,
+        null=True,
+        default="tasks_asset/default_img.jpg",
+    )
+
     def __str__(self):
         return f"{self.name}"
 

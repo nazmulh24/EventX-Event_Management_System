@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "events",  # --> app for managing events
     "users",
     "core",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -136,6 +137,10 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",  # -----> root a static folder connection...
 ]
+
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"  # --> root a media folder connection..
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

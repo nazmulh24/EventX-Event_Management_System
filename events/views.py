@@ -9,6 +9,7 @@ from events.forms import (
     AddParticipantForm,
     EditParticipantForm,
 )
+from users.forms import HostEventRequestForm
 from events.models import Event, Category
 
 from django.utils import timezone
@@ -25,7 +26,7 @@ from django.contrib import messages
 @user_passes_test(is_organizer, login_url="no-permission")
 def create_event(request):
     if request.method == "POST":
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
             event.creator = request.user

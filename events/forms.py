@@ -2,6 +2,7 @@ from django import forms
 from events.models import Event, Category
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ValidationError
+from django.forms import ClearableFileInput
 
 
 class StyleFormMixin:
@@ -70,6 +71,12 @@ class StyleFormMixin:
                         "class": self.default_classes,
                     }
                 )
+            elif isinstance(widget, forms.ClearableFileInput):
+                widget.attrs.update(
+                    {
+                        "class": self.default_classes,
+                    }
+                )
             else:
                 widget.attrs.update(
                     {
@@ -78,10 +85,19 @@ class StyleFormMixin:
                 )
 
 
-class EventForm(StyleFormMixin, forms.ModelForm):
+class EventForm(StyleFormMixin, forms.ModelForm): 
     class Meta:
         model = Event
-        fields = ["name", "description", "date", "time", "location", "category"]
+        fields = [
+            "asset",
+            "name",
+            "description",
+            "date",
+            "time",
+            "location",
+            "category",
+        ]
+
         widgets = {
             "date": forms.DateInput(attrs={"type": "date"}),
             "time": forms.TimeInput(attrs={"type": "time"}),
