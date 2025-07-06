@@ -1,9 +1,10 @@
-from django.db.models.signals import m2m_changed
+from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from events.models import Event
 from django.conf import settings
+from users.models import HostEventRequest
 
 
 # -----> Sending Email
@@ -75,3 +76,25 @@ def notify_users_on_task_creation(sender, instance, action, pk_set, **kwargs):
 #         )
 
 
+@receiver(post_save, sender=HostEventRequest)
+def send_host_request_email(sender, instance, created, **kwargs):
+    if created:
+        user = instance.user
+        full_name = f"{user.first_name} {user.last_name}".strip()
+        subject = "Organizer Role Request"
+        message = f"""
+        📢 New Organizer Request
+
+        🧑 Username : {user.username}
+        📧 Email : {user.email}
+        🪪 Full Name : {full_name}
+        📝 Motivation :
+        {instance.motivation}
+        """
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.ADMIN_EMAIL],
+            fail_silently=False,
+        )

@@ -14,7 +14,13 @@ from django.utils.timezone import make_aware
 from datetime import datetime
 
 from core.views import is_admin, is_organizer, is_participant
-from users.forms import CustomSign_UpForm, LoginForm, AssignRoleForm, CreateGroupForm
+from users.forms import (
+    CustomSign_UpForm,
+    LoginForm,
+    AssignRoleForm,
+    CreateGroupForm,
+    HostEventRequestForm,
+)
 from django.db.models import Prefetch
 
 
@@ -65,7 +71,7 @@ def sign_in(request):
 def sign_out(request):
     if request.method == "POST":
         logout(request)
-        return redirect("sign-in")
+        return redirect("home")
 
 
 def activate_user(request, user_id, token):
@@ -215,3 +221,19 @@ def organizer_dashboard(request):
             "events": events,
         },
     )
+
+
+@login_required
+def host_event_request(request):
+    if request.method == "POST":
+        form = HostEventRequestForm(request.POST)
+        if form.is_valid():
+            request_obj = form.save(commit=False)
+            request_obj.user = request.user
+            request_obj.save()
+            messages.success(request, "Your request has been submitted.")
+            return redirect("dashboard")
+    else:
+        form = HostEventRequestForm()
+
+    return render(request, "host_event_request.html", {"form": form})

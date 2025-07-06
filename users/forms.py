@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, Group, Permission
 import re
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from events.forms import StyleFormMixin
+from users.models import HostEventRequest
 
 
 class CustomSign_UpForm(StyleFormMixin, forms.ModelForm):
@@ -71,3 +72,18 @@ class CreateGroupForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Group
         fields = ["name", "permissions"]
+
+
+class HostEventRequestForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = HostEventRequest
+        fields = ["motivation"]
+        labels = {"motivation": "Why do you want to host events?"}
+        widgets = {
+            "motivation": forms.Textarea(
+                attrs={
+                    "rows": 5,
+                    "placeholder": "Explain in 2–3 lines",
+                }
+            )
+        }

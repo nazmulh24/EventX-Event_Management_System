@@ -143,12 +143,58 @@
 
             <!-- Join -->
             <div class="flex justify-center items-center m-5 gap-3">
-              <a
-                href="{% url 'join_event' event.id %}"
-                class="block px-5 py-2 text-lg font-bold text-white bg-orange-500 hover:bg-orange-400 rounded-md"
-              >
-                Join
-              </a>
+              <form 
+                action="{% url 'join_event' event.id %}" 
+                method="POST" 
+                onsubmit="return confirm('Are you sure you want to join this event?');"
+                >
+                {% csrf_token %}
+                <button 
+                  type="submit" 
+                  class="bg-blue-600 font-semibold text-white p-4 rounded-lg hover:bg-blue-700"
+                >
+                  Join Event
+                </button>
+              </form>
+
+              {% if messages %}
+                <div id="toast-container" class="fixed bottom-5 right-5 space-y-3 z-50">
+                  {% for message in messages %}
+                    <div class="px-4 py-3 rounded-md shadow-lg text-white animate-slide-in transition
+                      {% if message.tags == 'success' %} bg-green-600
+                      {% elif message.tags == 'info' %} bg-blue-500
+                      {% elif message.tags == 'warning' %} bg-yellow-400 text-black
+                      {% elif message.tags == 'error' %} bg-red-600
+                      {% endif %}">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              <style>
+                @keyframes slideIn {
+                  from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                  }
+                  to {
+                    transform: translateX(0);
+                    opacity: 1;
+                  }
+                }
+                .animate-slide-in {
+                  animation: slideIn 0.4s ease-out;
+                }
+              </style>
+
+              <script>
+                setTimeout(() => {
+                  const toast = document.getElementById("toast-container");
+                  if (toast) toast.remove();
+                }, 4000);
+              </script>
+
             </div>
           </div>
       </div>

@@ -28,8 +28,8 @@
           <div class="hidden md:flex items-center space-x-6 text-lg text-gray-700">
             <a href="{% url 'home' %}" class="hover:text-orange-600 font-medium">Home</a>
             <a href="{% url 'event' %}" class="hover:text-orange-600 font-medium">Events</a>
-            <a href="{% url 'about_us' %}" class="hover:text-orange-600 font-medium">History</a>
-            <a href="#" class="hover:text-orange-600 font-medium">Host a Event</a>
+            <a href="{% url 'event-history' %}" class="hover:text-orange-600 font-medium">History</a>
+            <a href="{% url 'host-event' %}" class="hover:text-orange-600 font-medium">Host a Event</a>
          
             <div class="flex items-center">
               <div class="relative">
@@ -90,8 +90,8 @@
         >
         <a href="{% url 'home' %}" class="block py-2 hover:text-orange-600">Home</a>
         <a href="{% url 'event' %}" class="block py-2 hover:text-orange-600">Events</a>
-        <a href="{% url 'about_us' %}" class="block py-2 hover:text-orange-600">History</a>
-        <a href="#" class="block py-2 hover:text-orange-600">Host a Event</a>
+        <a href="{% url 'event-history' %}" class="block py-2 hover:text-orange-600">History</a>
+        <a href="{% url 'host-event' %}" class="block py-2 hover:text-orange-600">Host a Event</a>
 
       </div>
     </nav>

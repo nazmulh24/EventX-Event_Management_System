@@ -16,7 +16,7 @@ from django.db.models import Q, Count
 from django.utils.timezone import make_aware
 from datetime import datetime
 
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from core.views import is_admin, is_organizer, is_participant
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -44,50 +44,18 @@ def create_event(request):
     return render(request, "create_event_form.html", context)
 
 
-# def join_event(request, id):
-#     event = get_object_or_404(Event, pk=id)
-#     message = None
-
-#     if request.method == "POST":
-#         name = request.POST.get("name")
-#         email = request.POST.get("email")
-
-#         if name and email:
-#             try:
-#                 participant = Participant.objects.get(email=email)
-#                 if participant not in event.participants.all():
-#                     event.participants.add(participant)
-#                     message = "You have successfully joined the event!"
-#                 else:
-#                     message = "You already joined this event."
-#             except Participant.DoesNotExist:
-#                 participant = Participant.objects.create(name=name, email=email)
-#                 event.participants.add(participant)
-#                 message = "You have been registered and joined the event!"
-
-#         else:
-#             message = "Please provide both name and email."
-
-#     return render(
-#         request,
-#         "join_event_form.html",
-#         {
-#             "event": event,
-#             "message": message,
-#         },
-#     )
-
-
+@login_required
 def join_event(request, id):
     event = get_object_or_404(Event, pk=id)
+    user = request.user
 
-    if request.user in event.participants.all():
-        messages.info(request, "You have already joined this event.")
+    if user in event.participants.all():
+        messages.warning(request, "You have already joined this event.")
     else:
-        event.participants.add(request.user)
+        event.participants.add(user)
         messages.success(request, "You have successfully joined the event!")
 
-    return redirect("event-details", id=id)  # Replace with your actual detail view name
+    return redirect("eDetails", event.id)
 
 
 # @user_passes_test(is_organizer, login_url="no-permission")
@@ -383,3 +351,36 @@ def delate_participant(request, id):
 
 
 #
+@login_required
+def event_history(request):
+    user = request.user
+    now = timezone.now()
+    today = timezone.localdate()  # gets current date (no time)
+
+    events = Event.objects.filter(participants=user).order_by("-date", "-time")
+
+    for event in events:
+        if event.date < today:
+            event.status = "End"
+        elif event.date == today:
+            event.status = "Ongoing"
+        else:
+            event.status = "Upcoming"
+
+    return render(request, "event_history.html", {"events": events})
+
+
+@login_required
+def host_event_request(request):
+    if request.method == "POST":
+        form = HostEventRequestForm(request.POST)
+        if form.is_valid():
+            request_obj = form.save(commit=False)
+            request_obj.user = request.user
+            request_obj.save()
+            messages.success(request, "Your request has been submitted.")
+            return redirect("dashboard")
+    else:
+        form = HostEventRequestForm()
+
+    return render(request, "events/host_event_request.html", {"form": form})

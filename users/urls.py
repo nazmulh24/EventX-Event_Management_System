@@ -10,6 +10,7 @@ from users.views import (
     assign_role,
     view_role,
     organizer_dashboard,
+    host_event_request,
 )
 
 urlpatterns = [
@@ -23,4 +24,5 @@ urlpatterns = [
     path("admin/<int:user_id>/assign-role/", assign_role, name="assign-role"),
     path("admin/view-role/", view_role, name="view-role"),
     path("organizer/dashboard/", organizer_dashboard, name="organizer-dashboard"),
+    path("host-event/", host_event_request, name="host-event"),
 ]
