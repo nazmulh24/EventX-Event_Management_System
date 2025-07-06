@@ -38,7 +38,7 @@ class Event(models.Model):
         upload_to="event_asset",
         blank=True,
         null=True,
-        default="tasks_asset/default_img.jpg",
+        default="event_asset/default_img.jpg",
     )
 
     def __str__(self):

@@ -157,11 +157,14 @@
             <div class="relative group bg-white rounded-xl shadow-lg flex flex-col">
 
               <div class="relative overflow-hidden rounded-t-xl">
-                <img
-                  src="{% static 'images/event.jpeg' %}"
-                  alt="Event_img"
-                  class="w-full h-48 object-cover transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-xl"
-                />
+                {% if event.asset %}
+                      <img src="{{ event.asset.url | default:'event_asset/default_img.jpg' }}" alt="Event_Asset"
+                      class="w-full h-48 object-cover transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-xl"/>
+                {% else %}
+                      <img src="{% static 'images/default_img.jpg' %}" alt="Default_Img"
+                      class="w-full h-48 object-cover transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-xl"/>
+                {% endif %}
+                
                 {% if event.date != today_date %}
                   <div
                     class="absolute top-2 left-2 w-14 h-14 rounded-lg p-1 backdrop-blur-md bg-orange-200/80 text-gray-800 flex flex-col items-center justify-center text-md font-semibold"

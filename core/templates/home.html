@@ -39,11 +39,9 @@
               {% for event in upcoming_events %}
                 <div id="slide{{ forloop.counter }}" class="carousel-item relative w-full">
                   <div class="flex flex-col md:flex-row items-center gap-10 p-10 text-left mx-10 w-full">
-                    <img
-                      src="{% static 'images/event.jpeg' %}"
-                      alt="Event-img"
-                      class="w-1/3 h-80 object-cover rounded-lg flex-shrink-0 border-2 border-orange-300"
-                    />
+                      <img src="{{ event.asset.url | default:'event_asset/default_img.jpg' }}" alt="Event_Asset"
+                      class="w-[400px] h-[250px] rounded-md object-cover transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-xl"/>
+                    
                     <div class="flex-1">
                       <h2 class="text-4xl font-bold text-gray-200">
                         {{ event.name }}
@@ -153,11 +151,8 @@
                   class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:scale-[1.03] transition-all duration-300"
                   >
                   <div class="relative">
-                    <img
-                      src="{% static 'images/event.jpeg' %}"
-                      alt="Event_img"
-                      class="w-full h-48 object-cover"
-                    />
+                    <img src="{{ event.asset.url | default:'event_asset/default_img.jpg' }}" alt="Event_Asset"
+                      class="w-[400px] h-48 rounded-md object-cover transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-xl"/>
                     <div
                       class="absolute w-14 h-17 top-2 left-2 rounded-lg p-2 bg-gradient-to-r from-orange-300 to-orange-500 text-white flex flex-col items-center justify-center"
                     >

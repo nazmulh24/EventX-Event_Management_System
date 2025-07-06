@@ -17,11 +17,8 @@
       <div class="gap-7 my-7">
         {% csrf_token %}
 
-          <img
-            src="{% static 'images/event.jpeg' %}"
-            alt="Event image"
-            class="rounded-lg w-full h-[300px] object-cover"
-          />
+        <img src="{{ event.asset.url | default:'event_asset/default_img.jpg' }}" alt="Event_Asset"
+        class="w-[800px] h-[300px] rounded-md object-cover transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-xl"/>
 
           <h2 class="font-semibold text-2xl my-2">{{event.name}}</h2>
           <p class="p-2 mb-4">{{ event.description }}</p>

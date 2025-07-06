@@ -32,25 +32,6 @@
 
           <h2 class="font-semibold text-lg m-2">Filter</h2>
 
-          {% comment %} <div class="flex">
-            <div class="space-y-2 gap-2">
-              <a href="{% url "event" %}?type=today_event">
-                <div
-                  class="p-2 border border-orange-300 rounded-full hover:bg-orange-100 inline-block"
-                  >
-                  Today Events
-                </div>
-              </a>
-              <a href="{% url "event" %}?type=upcoming_event">
-                <div
-                  class="p-2 border border-orange-300 rounded-full hover:bg-orange-100 inline-block"
-                  >
-                  Upcoming Events
-                </div>
-              </a>
-            </div>
-          </div> {% endcomment %}
-
           <div class="flex flex-wrap gap-2 p-2">
             <a href="{% url 'event' %}?type=today_event" class="inline-block">
               <div class="px-3 py-2 border border-orange-300 rounded-full hover:bg-orange-100 text-sm font-medium text-gray-700 transition-all duration-200">
@@ -134,11 +115,7 @@
                 <a href="{% url 'eDetails' event.id %}" class="block group">
                   <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
                     <div class="relative">
-                      <img
-                        src="{% static 'images/event.jpeg' %}"
-                        alt="Event_img"
-                        class="w-full h-48 object-cover"
-                      />
+                      <img src="{{ event.asset.url | default:'event_asset/default_img.jpg' }}" alt="Event_Asset" class="w-[400px] h-48 rounded-md object-cover transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-xl"/>
                       <div
                         class="absolute w-14 h-17 top-2 left-2 rounded-lg p-2 bg-gradient-to-r from-orange-300 to-orange-500 text-white flex flex-col items-center justify-center"
                       >
