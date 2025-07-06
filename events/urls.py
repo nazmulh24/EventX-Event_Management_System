@@ -18,7 +18,7 @@ from events.views import (
     edit_participant,
     delate_participant,
     event_history,
-    host_event_request,
+    # host_event_request,
 )
 
 
@@ -45,5 +45,5 @@ urlpatterns = [
     path("delate-participant/<int:id>/", delate_participant, name="delate_participant"),
     #
     path("my-events/history/", event_history, name="event-history"),
-    path("host-event/", host_event_request, name="host-event"),
+    # path("host-event/", host_event_request, name="host-event"),
 ]

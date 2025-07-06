@@ -18,12 +18,12 @@ from django.utils.timezone import make_aware
 from datetime import datetime
 
 from django.contrib.auth.decorators import user_passes_test, login_required
-from core.views import is_admin, is_organizer, is_participant
+from core.views import is_admin, is_organizer, is_participant, is_admin_or_organizer
 from django.contrib.auth.models import User
 from django.contrib import messages
 
 
-@user_passes_test(is_organizer, login_url="no-permission")
+@user_passes_test(is_organizer, login_url="/no-permission/")
 def create_event(request):
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
@@ -59,7 +59,7 @@ def join_event(request, id):
     return redirect("eDetails", event.id)
 
 
-# @user_passes_test(is_organizer, login_url="no-permission")
+@user_passes_test(is_organizer, login_url="no-permission")
 def dashboard_view(request):
     type = request.GET.get("type", "today_event")
 
@@ -125,6 +125,8 @@ def view_detail_dash(request, id):
     )
 
 
+@login_required
+@user_passes_test(is_admin_or_organizer, login_url="/no-permission/")
 def edit_event(request, id):
     event = get_object_or_404(Event, id=id)
     categories = Category.objects.all()
@@ -153,6 +155,8 @@ def edit_event(request, id):
     )
 
 
+@login_required
+@user_passes_test(is_admin_or_organizer, login_url="/no-permission/")
 def delete_event(request, id):
     event = get_object_or_404(Event, id=id)
     if request.method == "POST":
@@ -220,6 +224,8 @@ def view_detail(request, id):
     )
 
 
+@login_required
+@user_passes_test(is_admin_or_organizer, login_url="/no-permission/")
 def view_category(request):
     query = request.GET.get("q", "")
 
@@ -241,6 +247,8 @@ def view_category(request):
     )
 
 
+@login_required
+@user_passes_test(is_admin_or_organizer, login_url="/no-permission/")
 def add_category(request):
     if request.method == "POST":
         form = CategoryForm(request.POST)
@@ -254,6 +262,8 @@ def add_category(request):
     return render(request, "add_category_form.html", {"form": form})
 
 
+@login_required
+@user_passes_test(is_admin_or_organizer, login_url="/no-permission/")
 def edit_category(request, id):
     category = get_object_or_404(Category, id=id)
 
@@ -270,6 +280,8 @@ def edit_category(request, id):
     )
 
 
+@login_required
+@user_passes_test(is_admin_or_organizer, login_url="/no-permission/")
 def delete_category(request, id):
     category = get_object_or_404(Category, id=id)
 
@@ -277,6 +289,8 @@ def delete_category(request, id):
     return redirect("category")
 
 
+@login_required
+@user_passes_test(is_admin, login_url="/no-permission/")
 def view_participant(request):
     query = request.GET.get("q", "")
 
@@ -297,6 +311,8 @@ def view_participant(request):
     )
 
 
+@login_required
+@user_passes_test(is_admin, login_url="/no-permission/")
 def add_participant(request):
     if request.method == "POST":
         form = AddParticipantForm(request.POST)
@@ -322,6 +338,8 @@ def add_participant(request):
     return render(request, "add_participant_form.html", {"form": form})
 
 
+@login_required
+@user_passes_test(is_admin, login_url="/no-permission/")
 def edit_participant(request, id):
     participant = get_object_or_404(User, id=id)
     if request.method == "POST":
@@ -344,6 +362,8 @@ def edit_participant(request, id):
     )
 
 
+@login_required
+@user_passes_test(is_admin, login_url="/no-permission/")
 def delate_participant(request, id):
     participant = get_object_or_404(User, id=id)
 
@@ -353,6 +373,7 @@ def delate_participant(request, id):
 
 #
 @login_required
+@user_passes_test(is_participant, login_url="/no-permission/")
 def event_history(request):
     user = request.user
     now = timezone.now()
@@ -371,17 +392,18 @@ def event_history(request):
     return render(request, "event_history.html", {"events": events})
 
 
-@login_required
-def host_event_request(request):
-    if request.method == "POST":
-        form = HostEventRequestForm(request.POST)
-        if form.is_valid():
-            request_obj = form.save(commit=False)
-            request_obj.user = request.user
-            request_obj.save()
-            messages.success(request, "Your request has been submitted.")
-            return redirect("dashboard")
-    else:
-        form = HostEventRequestForm()
+# @login_required
+# @user_passes_test(is_participant, login_url="/no-permission/")
+# def host_event_request(request):
+#     if request.method == "POST":
+#         form = HostEventRequestForm(request.POST)
+#         if form.is_valid():
+#             request_obj = form.save(commit=False)
+#             request_obj.user = request.user
+#             request_obj.save()
+#             messages.success(request, "Your request has been submitted.")
+#             return redirect("dashboard")
+#     else:
+#         form = HostEventRequestForm()
 
-    return render(request, "events/host_event_request.html", {"form": form})
+#     return render(request, "events/host_event_request.html", {"form": form})

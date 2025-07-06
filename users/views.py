@@ -24,6 +24,10 @@ from users.forms import (
 from django.db.models import Prefetch
 
 
+from django.contrib.auth.decorators import login_required
+from events.models import Event
+
+
 def sign_up(request):
     form = CustomSign_UpForm()
 
@@ -59,7 +63,7 @@ def sign_in(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("dashboard")
+            return redirect("home")
 
     context = {
         "form": form,
@@ -90,7 +94,8 @@ def activate_user(request, user_id, token):
         return HttpResponse("User Not Found")
 
 
-@user_passes_test(is_admin, login_url="no-permission")
+@user_passes_test(is_admin, login_url="/no-permission/")
+# @user_passes_test(is_admin, login_url="no-permission")
 def admin_dashboard(request):
     type = request.GET.get("type", "today_event")
 
@@ -141,7 +146,7 @@ def admin_dashboard(request):
     return render(request, "admin/admin_dashboard.html", context)
 
 
-@user_passes_test(is_admin, login_url="no-permission")
+@user_passes_test(is_admin, login_url="/no-permission/")
 def view_role(request):
     users = User.objects.prefetch_related(
         Prefetch("groups", queryset=Group.objects.all(), to_attr="all_groups")
@@ -159,7 +164,7 @@ def view_role(request):
     return render(request, "admin/user_list.html", context)
 
 
-@user_passes_test(is_admin, login_url="no-permission")
+@user_passes_test(is_admin, login_url="/no-permission/")
 def assign_role(request, user_id):
     user = User.objects.get(id=user_id)
     form = AssignRoleForm()
@@ -181,7 +186,7 @@ def assign_role(request, user_id):
     return render(request, "admin/assign_role.html", context)
 
 
-@user_passes_test(is_admin, login_url="no-permission")
+@user_passes_test(is_admin, login_url="/no-permission/")
 def create_group(request):
     form = CreateGroupForm()
 
@@ -198,18 +203,15 @@ def create_group(request):
     return render(request, "admin/create_group.html", {"form": form})
 
 
-@user_passes_test(is_admin, login_url="no-permission")
+@user_passes_test(is_admin, login_url="/no-permission/")
 def group_list(request):
     groups = Group.objects.prefetch_related("permissions").all()
 
     return render(request, "admin/group_list.html", {"groups": groups})
 
 
-from django.contrib.auth.decorators import login_required
-from events.models import Event
-
-
 @login_required
+@user_passes_test(is_organizer, login_url="/no-permission/")
 def organizer_dashboard(request):
     user = request.user
     events = Event.objects.filter(creator=user).order_by("-date")
@@ -224,6 +226,7 @@ def organizer_dashboard(request):
 
 
 @login_required
+@user_passes_test(is_participant, login_url="/no-permission/")
 def host_event_request(request):
     if request.method == "POST":
         form = HostEventRequestForm(request.POST)
@@ -232,7 +235,7 @@ def host_event_request(request):
             request_obj.user = request.user
             request_obj.save()
             messages.success(request, "Your request has been submitted.")
-            return redirect("dashboard")
+            return redirect("host-event")
     else:
         form = HostEventRequestForm()
 

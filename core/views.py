@@ -68,3 +68,7 @@ def is_organizer(user):
 
 def is_participant(user):
     return user.groups.filter(name="Participant").exists()
+
+
+def is_admin_or_organizer(user):
+    return user.groups.filter(name__in=["Admin", "Organizer"]).exists()
