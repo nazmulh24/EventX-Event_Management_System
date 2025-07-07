@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User, Group, Permission
 import re
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from events.forms import StyleFormMixin
 from users.models import HostEventRequest
 from django.contrib.auth.forms import PasswordChangeForm
@@ -45,7 +45,6 @@ class CustomSign_UpForm(StyleFormMixin, forms.ModelForm):
         return cleaned_data
 
 
-#
 class LoginForm(StyleFormMixin, AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -84,7 +83,7 @@ class HostEventRequestForm(StyleFormMixin, forms.ModelForm):
             "motivation": forms.Textarea(
                 attrs={
                     "rows": 5,
-                    "placeholder": "Explain in 2–3 lines",
+                    "placeholder": "Explain in 2-3 lines",
                 }
             )
         }
