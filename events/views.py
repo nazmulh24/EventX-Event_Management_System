@@ -1,22 +1,15 @@
 from django.db import IntegrityError
 from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponse
 from events.forms import (
     EventForm,
     CategoryForm,
-    ParticipantForm,
-    JoinEventForm,
     AddParticipantForm,
     EditParticipantForm,
 )
-from users.forms import HostEventRequestForm
 from events.models import Event, Category
-
 from django.utils import timezone
 from django.db.models import Q, Count
-from django.utils.timezone import make_aware
 from datetime import datetime
-
 from django.contrib.auth.decorators import user_passes_test, login_required
 from core.views import is_admin, is_organizer, is_participant, is_admin_or_organizer
 from django.contrib.auth.models import User
@@ -63,7 +56,6 @@ def join_event(request, id):
 def dashboard_view(request):
     type = request.GET.get("type", "today_event")
 
-    # participants = Participant.objects.count()
     participants = User.objects.filter(groups__name="Participant").count()
     events = Event.objects.all()
 
@@ -233,7 +225,6 @@ def view_category(request):
     query = request.GET.get("q", "")
 
     categorys = Category.objects.all()
-
     total_categories = categorys.count()
 
     if query:
@@ -298,7 +289,6 @@ def view_participant(request):
     query = request.GET.get("q", "")
 
     participants = User.objects.prefetch_related("events")
-
     total_participants = participants.count()
 
     if query:
@@ -379,8 +369,7 @@ def delate_participant(request, id):
 @user_passes_test(is_participant, login_url="/no-permission/")
 def event_history(request):
     user = request.user
-    now = timezone.now()
-    today = timezone.localdate()  # gets current date (no time)
+    today = timezone.localdate()
 
     events = Event.objects.filter(participants=user).order_by("-date", "-time")
 
@@ -393,20 +382,3 @@ def event_history(request):
             event.status = "Upcoming"
 
     return render(request, "event_history.html", {"events": events})
-
-
-# @login_required
-# @user_passes_test(is_participant, login_url="/no-permission/")
-# def host_event_request(request):
-#     if request.method == "POST":
-#         form = HostEventRequestForm(request.POST)
-#         if form.is_valid():
-#             request_obj = form.save(commit=False)
-#             request_obj.user = request.user
-#             request_obj.save()
-#             messages.success(request, "Your request has been submitted.")
-#             return redirect("dashboard")
-#     else:
-#         form = HostEventRequestForm()
-
-#     return render(request, "events/host_event_request.html", {"form": form})

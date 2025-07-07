@@ -1,18 +1,13 @@
-from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponse
 from users.forms import CustomSign_UpForm, LoginForm
 from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.tokens import default_token_generator
-
-from events.models import Event, Category
-
+from events.models import Event
 from django.utils import timezone
 from django.db.models import Q, Count
-from django.utils.timezone import make_aware
-from datetime import datetime
-
 from core.views import is_admin, is_organizer, is_participant
 from users.forms import (
     CustomSign_UpForm,
@@ -24,9 +19,6 @@ from users.forms import (
 )
 from django.db.models import Prefetch
 
-
-from django.contrib.auth.decorators import login_required
-from events.models import Event
 
 
 def sign_up(request):
@@ -40,9 +32,7 @@ def sign_up(request):
             user.is_active = False
             user.save()
 
-            participant_group = Group.objects.get(
-                name="Participant"
-            )  # --> Assign default group
+            participant_group = Group.objects.get(name="Participant")
             user.groups.add(participant_group)
 
             messages.success(
@@ -92,14 +82,13 @@ def activate_user(request, user_id, token):
 
             return redirect("sign-in")
         else:
-            return HttpResponse("Invalid ID / Token...")
+            return HttpResponse("Invalid activation link...")
 
     except User.DoesNotExist:
         return HttpResponse("User Not Found")
 
 
 @user_passes_test(is_admin, login_url="/no-permission/")
-# @user_passes_test(is_admin, login_url="no-permission")
 def admin_dashboard(request):
     type = request.GET.get("type", "today_event")
 

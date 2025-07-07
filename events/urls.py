@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from events.views import (
     create_event,
@@ -18,13 +18,12 @@ from events.views import (
     edit_participant,
     delate_participant,
     event_history,
-    # host_event_request,
 )
 
 
 urlpatterns = [
     path("create-event/", create_event, name="create_event"),
-    path("join-event/<int:id>/", join_event, name="join_event"),  # --> Join Event...
+    path("join-event/<int:id>/", join_event, name="join_event"),
     #
     path("dashboard/", dashboard_view, name="dashboard"),
     path("event-dash/<int:id>/", view_detail_dash, name="eDetails_D"),
@@ -45,5 +44,4 @@ urlpatterns = [
     path("delate-participant/<int:id>/", delate_participant, name="delate_participant"),
     #
     path("my-events/history/", event_history, name="event-history"),
-    # path("host-event/", host_event_request, name="host-event"),
 ]

@@ -119,24 +119,26 @@
           </div>
 
           <!-- Countdown Timer -->
-          <div class="flex gap-3 text-center">
+          <div class="flex gap-3 text-center" id="countdown" data-event-time="{{ next_event_time }}">
             <div class="border border-white rounded-lg px-4 py-2">
-              <div class="text-3xl font-bold" id="days">{{days|default:"00"}}</div>
+              <div id="days" class="text-3xl font-bold">00</div>
               <div class="text-sm">DAYS</div>
             </div>
             <div class="border border-white rounded-lg px-4 py-2">
-              <div class="text-3xl font-bold" id="hours">{{hours|default:"00"}}</div>
+              <div id="hours" class="text-3xl font-bold">00</div>
               <div class="text-sm">HOURS</div>
             </div>
             <div class="border border-white rounded-lg px-4 py-2">
-              <div class="text-3xl font-bold" id="minutes">{{minutes|default:"00"}}</div>
+              <div id="minutes" class="text-3xl font-bold">00</div>
               <div class="text-sm">MINUTES</div>
             </div>
             <div class="border border-white rounded-lg px-4 py-2">
-              <div class="text-3xl font-bold" id="seconds">{{seconds|default:"00"}}</div>
+              <div id="seconds" class="text-3xl font-bold">00</div>
               <div class="text-sm">SECONDS</div>
             </div>
           </div>
+
+          <script src="{% static 'js/timer.js' %}"></script>
         </div>
       </section>
 

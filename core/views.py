@@ -1,42 +1,37 @@
-# from django.db import IntegrityError
-from django.shortcuts import redirect, render, get_object_or_404
-
-# from django.http import HttpResponse
-# from events.forms import EventForm, CategoryForm, ParticipantForm, JoinEventForm
-from events.models import Event, Category
-
-from django.utils import timezone
-from django.db.models import Q, Count
-from django.utils.timezone import make_aware
+from django.shortcuts import render
+from events.models import Event
+from django.utils.timezone import make_aware, now as django_now
+from django.db.models import Q
 from datetime import datetime
 
 
 def home_view(request):
-    now = timezone.now()
+    now = django_now()
 
-    upcoming_events = Event.objects.filter(
+    upcoming_events_qs = Event.objects.filter(
         Q(date__gt=now.date()) | Q(date=now.date(), time__gte=now.time())
-    ).order_by("date", "time")[:3]
+    ).order_by("date", "time")
 
-    next_event = (
-        Event.objects.filter(
-            Q(date__gt=now.date()) | Q(date=now.date(), time__gte=now.time())
-        )
-        .order_by("date", "time")
-        .first()
-    )
+    upcoming_events = upcoming_events_qs[:3]
 
+    next_event = None
     days = hours = minutes = seconds = None
+    next_event_time = None
 
-    if next_event:
-        event_datetime = make_aware(datetime.combine(next_event.date, next_event.time))
-        time_left = event_datetime - now
+    for event in upcoming_events_qs:
+        event_datetime = make_aware(datetime.combine(event.date, event.time))
 
-        total_seconds = int(time_left.total_seconds())
-        days = total_seconds // 86400
-        hours = (total_seconds % 86400) // 3600
-        minutes = (total_seconds % 3600) // 60
-        seconds = total_seconds % 60
+        if event_datetime > now:
+            next_event = event
+            time_left = event_datetime - now
+            total_seconds = int(time_left.total_seconds())
+
+            days = total_seconds // 86400
+            hours = (total_seconds % 86400) // 3600
+            minutes = (total_seconds % 3600) // 60
+            seconds = total_seconds % 60
+            next_event_time = event_datetime.strftime("%Y-%m-%dT%H:%M:%S")
+            break
 
     context = {
         "upcoming_events": upcoming_events,
@@ -45,8 +40,8 @@ def home_view(request):
         "hours": hours,
         "minutes": minutes,
         "seconds": seconds,
+        "next_event_time": next_event_time,
     }
-
     return render(request, "home.html", context)
 
 
