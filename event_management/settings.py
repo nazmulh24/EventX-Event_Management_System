@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,22 +81,22 @@ WSGI_APPLICATION = "event_management.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # --> For postgres
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("DB_NAME", default=""),
-        "USER": config("DB_USER", default=""),
-        "PASSWORD": config("DB_PASSWORD", default=""),
-        "HOST": config("DB_HOST", default="localhost"),
-        "PORT": config("DB_PORT", cast=int),
-    }
-}
 # DATABASES = {
-#     "default": dj_database_url.config(
-#         default="postgresql://eventx_db_nao0_user:cqMO7mDMpPBtGE27yLfuaaUFP5TQev7k@dpg-d1cpa6re5dus73a5o4og-a.oregon-postgres.render.com/eventx_db_nao0",
-#         conn_max_age=600,
-#     )
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": config("DB_NAME", default=""),
+#         "USER": config("DB_USER", default=""),
+#         "PASSWORD": config("DB_PASSWORD", default=""),
+#         "HOST": config("DB_HOST", default="localhost"),
+#         "PORT": config("DB_PORT", cast=int),
+#     }
 # }
+DATABASES = {
+    "default": dj_database_url.config(
+        default="postgresql://eventx_db_poqv_user:ZC0cOhYBuKEHdZweYiu7IFcAY4vcuF3T@dpg-d1lo4nmr433s73dvht7g-a.oregon-postgres.render.com/eventx_db_poqv",
+        conn_max_age=600,
+    )
+}
 
 
 # Password validation
