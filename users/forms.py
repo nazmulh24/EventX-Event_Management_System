@@ -4,6 +4,7 @@ import re
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from events.forms import StyleFormMixin
 from users.models import HostEventRequest
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class CustomSign_UpForm(StyleFormMixin, forms.ModelForm):
@@ -87,3 +88,7 @@ class HostEventRequestForm(StyleFormMixin, forms.ModelForm):
                 }
             )
         }
+
+
+class StyledPasswordChangeForm(StyleFormMixin, PasswordChangeForm):
+    pass

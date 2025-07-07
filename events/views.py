@@ -59,7 +59,7 @@ def join_event(request, id):
     return redirect("eDetails", event.id)
 
 
-@user_passes_test(is_organizer, login_url="no-permission")
+@user_passes_test(is_admin_or_organizer, login_url="no-permission")
 def dashboard_view(request):
     type = request.GET.get("type", "today_event")
 
@@ -141,6 +141,9 @@ def edit_event(request, id):
         category_id = request.POST.get("category")
         if category_id:
             event.category = get_object_or_404(Category, id=category_id)
+
+        if request.FILES.get("asset"):
+            event.asset = request.FILES["asset"]
 
         event.save()
         return redirect("dashboard")

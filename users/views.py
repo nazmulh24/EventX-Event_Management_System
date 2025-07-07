@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from users.forms import CustomSign_UpForm, LoginForm
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.tokens import default_token_generator
@@ -20,6 +20,7 @@ from users.forms import (
     AssignRoleForm,
     CreateGroupForm,
     HostEventRequestForm,
+    StyledPasswordChangeForm,
 )
 from django.db.models import Prefetch
 
@@ -63,7 +64,10 @@ def sign_in(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("home")
+            if request.user.groups.filter(name="Admin").exists():
+                return redirect("admin-dashboard")
+            else:
+                return redirect("home")
 
     context = {
         "form": form,
@@ -240,3 +244,22 @@ def host_event_request(request):
         form = HostEventRequestForm()
 
     return render(request, "host_event_request.html", {"form": form})
+
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = StyledPasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect("password_change_done")
+    else:
+        form = StyledPasswordChangeForm(user=request.user)
+
+    return render(request, "Registration/change_pass.html", {"form": form})
+
+
+@login_required
+def password_change_done(request):
+    return render(request, "Registration/change_pass_done.html")

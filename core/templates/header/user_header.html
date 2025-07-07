@@ -28,8 +28,8 @@
           <div class="hidden md:flex items-center space-x-6 text-lg text-gray-700">
             <a href="{% url 'home' %}" class="hover:text-orange-600 font-medium">Home</a>
             <a href="{% url 'event' %}" class="hover:text-orange-600 font-medium">Events</a>
-            <a href="{% url 'event-history' %}" class="hover:text-orange-600 font-medium">History</a>
-            <a href="{% url 'host-event' %}" class="hover:text-orange-600 font-medium">Host a Event</a>
+            <a href="{% url 'event-history' %}" class="hover:text-orange-600 font-medium">My History</a>
+            <a href="{% url 'host-event' %}" class="hover:text-orange-600 font-medium">Host an Event</a>
          
             <div class="flex items-center">
               <div class="relative">
@@ -49,6 +49,9 @@
                   </svg>
                 </button>
                 <div id="user-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
+                  <a href="{% url 'change_password' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Change Password
+                  </a>
                   <form method="post" action="{% url 'sign-out' %}">
                     {% csrf_token %}
                     <button class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -90,8 +93,8 @@
         >
         <a href="{% url 'home' %}" class="block py-2 hover:text-orange-600">Home</a>
         <a href="{% url 'event' %}" class="block py-2 hover:text-orange-600">Events</a>
-        <a href="{% url 'event-history' %}" class="block py-2 hover:text-orange-600">History</a>
-        <a href="{% url 'host-event' %}" class="block py-2 hover:text-orange-600">Host a Event</a>
+        <a href="{% url 'event-history' %}" class="block py-2 hover:text-orange-600">My History</a>
+        <a href="{% url 'host-event' %}" class="block py-2 hover:text-orange-600">Host an Event</a>
 
       </div>
     </nav>

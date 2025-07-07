@@ -14,7 +14,7 @@
     {% include "header.html" %}
 
     <main class="w-1/2 mx-auto my-10 p-7 border rounded-lg shadow-lg">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
             <!-- Event Name -->
@@ -90,6 +90,24 @@
                         </option>
                     {% endfor %}
                 </select>
+            </div>
+
+            <!-- Asset -->
+            <div class="mb-6">
+                <label for="asset" class="block font-medium mb-1">Banner Image <span class="text-sm text-gray-500">(Recommended size: 800×400)</span></label>
+            
+                {% if event.asset %}
+                  <img src="{{ event.asset.url }}" alt="Current Banner"
+                       class="w-[400px] h-[200px] object-cover rounded-md shadow mb-2"/>
+                {% endif %}
+            
+                <input
+                    type="file"
+                    name="asset"
+                    accept="image/*"
+                    id="asset"
+                    class="w-full border border-gray-300 rounded-md p-2 bg-gray-50"
+                />
             </div>
   
             <!-- Submit Button -->

@@ -54,6 +54,9 @@
                 <a href="{% url 'admin-dashboard' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                   Dashboard
                 </a>
+                <a href="{% url 'change_password' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Change Password
+                </a>
                 <form method="post" action="{% url 'sign-out' %}">
                   {% csrf_token %}
                   <button class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">

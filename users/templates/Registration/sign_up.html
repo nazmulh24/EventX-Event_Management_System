@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign Up | EventX</title>
     {% include "links.html" %}
 </head>
 <body>
+  {% include "header.html" %}
 
     <main>
         <div class="max-w-md mx-auto m-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
@@ -45,16 +46,18 @@
                         class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200">
                     Sign Up
                 </button>
-    
+
                 <p class="text-center text-sm text-gray-600 mt-4">
                     Already have an account?
                     <a href="{% url 'sign-in' %}" class="text-blue-600 hover:underline font-medium">
-                      Sign in here
+                        Sign in here
                     </a>
                 </p>
             </form>
         </div>
     </main>
+
+    {% include "footer.html" %}
     
 </body>
 </html>
