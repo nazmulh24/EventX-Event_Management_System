@@ -1,12 +1,14 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.mail import send_mail, EmailMultiAlternatives
-from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+
 from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 @receiver(post_save, sender=User)
@@ -41,4 +43,3 @@ def send_activation_mail(sender, instance, created, **kwargs):
             email.send()
         except Exception as e:
             print(f"Error sending activation email to {recipient_list} : {str(e)}")
-

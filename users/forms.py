@@ -1,10 +1,18 @@
 from django import forms
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import Group, Permission
 import re
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    PasswordChangeForm,
+    PasswordResetForm,
+    SetPasswordForm,
+)
 from events.forms import StyleFormMixin
-from users.models import HostEventRequest
-from django.contrib.auth.forms import PasswordChangeForm
+from users.models import HostEventRequest, CustomUser
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class CustomSign_UpForm(StyleFormMixin, forms.ModelForm):
@@ -90,4 +98,28 @@ class HostEventRequestForm(StyleFormMixin, forms.ModelForm):
 
 
 class StyledPasswordChangeForm(StyleFormMixin, PasswordChangeForm):
+    pass
+
+
+class EditProfileForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = [
+            "email",
+            "first_name",
+            "last_name",
+            "bio",
+            "profile_img",
+        ]
+
+
+class CustomPasswordChangeForm(StyleFormMixin, PasswordChangeForm):
+    pass
+
+
+class CustomPasswordResetForm(StyleFormMixin, PasswordResetForm):
+    pass
+
+
+class CustomConfirmPasswordForm(StyleFormMixin, SetPasswordForm):
     pass

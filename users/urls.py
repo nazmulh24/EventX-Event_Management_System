@@ -1,11 +1,10 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView, PasswordChangeDoneView
 from users.views import (
     group_list,
     create_group,
     organizer_dashboard,
     host_event_request,
-    change_password,
-    password_change_done,
     #
     SignUp,
     ActivateUser,
@@ -13,11 +12,33 @@ from users.views import (
     AdminDashboard,
     ViewRole,
     AssignRoleView,
+    #
+    ProfileView,
+    UpdateProfile,
+    ChangePassword,
+    CustomPasswordResetView,
+    PasswordResetConfirmView,
 )
-from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
+    path("profile/", ProfileView.as_view(), name="profile"),
+    path("edit-profile/", UpdateProfile.as_view(), name="edit-profile"),
+    path("password-change/", ChangePassword.as_view(), name="password-change"),
+    path(
+        "password-change/done/",
+        PasswordChangeDoneView.as_view(
+            template_name="accounts/password_change_done.html",
+        ),
+        name="password_change_done",
+    ),
+    path("password-reset/", CustomPasswordResetView.as_view(), name="password-reset"),
+    path(
+        "password-reset/confirm/<uidb64>/<token>/",
+        PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
+    #
     path("sign-up/", SignUp.as_view(), name="sign-up"),
     path(
         "activate/<int:user_id>/<str:token>/",
@@ -36,7 +57,4 @@ urlpatterns = [
     path("admin/create-group/", create_group, name="create-group"),
     path("organizer/dashboard/", organizer_dashboard, name="organizer-dashboard"),
     path("host-event/", host_event_request, name="host-event"),
-    #
-    path("change-password/", change_password, name="change_password"),
-    path("password-changed/", password_change_done, name="password_change_done"),
 ]

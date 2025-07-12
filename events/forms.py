@@ -1,8 +1,12 @@
 from django import forms
 from events.models import Event, Category
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.forms import ClearableFileInput
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class StyleFormMixin:
@@ -85,7 +89,7 @@ class StyleFormMixin:
                 )
 
 
-class EventForm(StyleFormMixin, forms.ModelForm): 
+class EventForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Event
         fields = [

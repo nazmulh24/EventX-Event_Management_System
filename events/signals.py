@@ -1,10 +1,13 @@
 from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
-from django.contrib.auth.models import User
 from events.models import Event
 from django.conf import settings
 from users.models import HostEventRequest
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 # -----> Sending Email
@@ -21,7 +24,7 @@ def notify_users_on_task_creation(sender, instance, action, pk_set, **kwargs):
                 recipient_list=[user.email],
                 fail_silently=False,
             )
-            
+
 
 @receiver(post_save, sender=HostEventRequest)
 def send_host_request_email(sender, instance, created, **kwargs):

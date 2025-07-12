@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class Category(models.Model):
@@ -25,13 +25,16 @@ class Event(models.Model):
     )
 
     participants = models.ManyToManyField(
-        User,
+        # User,
+        settings.AUTH_USER_MODEL,
         related_name="events",
         blank=True,
     )
 
     creator = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="created_events"
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="created_events",
     )
 
     asset = models.ImageField(

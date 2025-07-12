@@ -34,20 +34,15 @@
 
           <div class="flex items-center">
             <div class="relative">
-              {% comment %} <button
+              <button
                 id="user-menu-button"
                 class="flex items-center focus:outline-none"
                 > 
                 <img
                   class="h-8 w-8 rounded-full object-cover"
-                  src="https://placekitten.com/100/100"
+                  src="{{ request.user.profile_img.url }}"
                   alt="User avatar"
                 />
-              </button> {% endcomment %}
-              <button id="user-menu-button" class="w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center hover:bg-orange-300">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6 text-orange-600">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.5-1.632Z"/>
-                </svg>
               </button>
               <div
                 id="user-menu"
@@ -58,8 +53,8 @@
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                   Dashboard
                 </a>
-                <a href="{% url 'change_password' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  Change Password
+                <a href="{% url 'profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  View Profile
                 </a>
                 <form method="post" action="{% url 'sign-out' %}">
                   {% csrf_token %}

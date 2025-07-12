@@ -12,8 +12,11 @@ from django.db.models import Q, Count
 from datetime import datetime
 from django.contrib.auth.decorators import user_passes_test, login_required
 from core.views import is_admin, is_organizer, is_participant, is_admin_or_organizer
-from django.contrib.auth.models import User
 from django.contrib import messages
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 @user_passes_test(is_organizer, login_url="/no-permission/")
