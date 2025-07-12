@@ -1,4 +1,4 @@
-{% comment %} 
+
 {% if request.user.is_authenticated %}
   {% if request.user.groups.all.0.name == "Admin" %}
     {% include "header/admin_header.html" %}
@@ -11,16 +11,4 @@
   {% endif %}
 {% else %}
   {% include "header/guest_header.html" %}
-{% endif %} {% endcomment %}
-
-{% with request.user.groups.all|first as group %}
-  {% if group.name == "Admin" %}
-    {% include "header/admin_header.html" %}
-  {% elif group.name == "Organizer" %}
-    {% include "header/organizer_header.html" %}
-  {% elif group.name == "Participant" %}
-    {% include "header/user_header.html" %}
-  {% else %}
-    {% include "header/user_header.html" %}
-  {% endif %}
-{% endwith %}
+{% endif %}
