@@ -19,7 +19,7 @@ def notify_users_on_task_creation(sender, instance, action, pk_set, **kwargs):
         for user in new_users:
             send_mail(
                 subject="Confirmation Mail",
-                message=f"Hello {user.first_name},\n\nYou have successfully perticipate the event : {instance.username}.",
+                message=f"Hello {user.first_name} {user.last_name},\n\nYou have successfully perticipate the event : {instance.name}.",
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[user.email],
                 fail_silently=False,

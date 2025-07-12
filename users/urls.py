@@ -16,8 +16,6 @@ from users.views import (
     ProfileView,
     UpdateProfile,
     ChangePassword,
-    CustomPasswordResetView,
-    PasswordResetConfirmView,
 )
 
 
@@ -28,15 +26,9 @@ urlpatterns = [
     path(
         "password-change/done/",
         PasswordChangeDoneView.as_view(
-            template_name="accounts/password_change_done.html",
+            template_name="accounts/password_change_done.html"
         ),
         name="password_change_done",
-    ),
-    path("password-reset/", CustomPasswordResetView.as_view(), name="password-reset"),
-    path(
-        "password-reset/confirm/<uidb64>/<token>/",
-        PasswordResetConfirmView.as_view(),
-        name="password_reset_confirm",
     ),
     #
     path("sign-up/", SignUp.as_view(), name="sign-up"),

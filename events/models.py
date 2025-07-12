@@ -25,7 +25,6 @@ class Event(models.Model):
     )
 
     participants = models.ManyToManyField(
-        # User,
         settings.AUTH_USER_MODEL,
         related_name="events",
         blank=True,

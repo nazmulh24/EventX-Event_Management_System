@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from users.forms import CustomSign_UpForm, LoginForm
 from django.views import View
 from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
 from django.contrib.auth.tokens import default_token_generator
@@ -18,16 +17,9 @@ from users.forms import (
     HostEventRequestForm,
     EditProfileForm,
     CustomPasswordChangeForm,
-    CustomConfirmPasswordForm,
-    CustomPasswordResetForm,
 )
 from django.db.models import Prefetch
-from django.contrib.auth.views import (
-    LoginView,
-    PasswordChangeView,
-    PasswordResetView,
-    PasswordResetConfirmView,
-)
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.urls import reverse_lazy
 
 from django.views.generic import TemplateView, UpdateView
@@ -60,29 +52,6 @@ class ProfileView(TemplateView):
         return context
 
 
-class ProfileView(TemplateView):
-    template_name = "accounts/profile.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = self.request.user
-
-        # user_profile = getattr(
-        #     user, "userprofile", None
-        # ) 
-
-        context["username"] = user.username
-        context["email"] = user.email
-        context["name"] = user.get_full_name()
-        context["bio"] = user.bio
-        context["profile_img"] = user.profile_img
-
-        context["member_since"] = user.date_joined
-        context["last_login"] = user.last_login
-
-        return context
-
-
 class UpdateProfile(UpdateView):
     model = User
     form_class = EditProfileForm
@@ -100,35 +69,6 @@ class UpdateProfile(UpdateView):
 class ChangePassword(PasswordChangeView):
     template_name = "accounts/password_change.html"
     form_class = CustomPasswordChangeForm
-
-
-class CustomPasswordResetView(PasswordResetView):
-    form_class = CustomPasswordResetForm
-    template_name = "Registration/reset_password.html"
-    success_url = reverse_lazy("sign-in")
-    html_email_template_name = "registration/reset_email.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context["protocol"] = "https" if self.request.is_secure() else "http"
-        context["domain"] = self.request.get_host()
-
-        return context
-
-    def form_valid(self, form):
-        messages.success(self.request, "A reset email send. Please check your email...")
-        return super().form_valid(form)
-
-
-class PasswordResetConfirmView(PasswordResetConfirmView):
-    form_class = CustomConfirmPasswordForm
-    template_name = "Registration/reset_password.html"
-    success_url = reverse_lazy("sign-in")
-
-    def form_valid(self, form):
-        messages.success(self.request, "Password has been reset successfully...")
-        return super().form_valid(form)
 
 
 ########################################################################################
