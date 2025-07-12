@@ -19,7 +19,7 @@
           {% endfor %}
         {% endif %}
     
-        <form action="{% url 'sign-in' %}" method="POST" class="space-y-5">
+        <form method="POST" class="space-y-5">
           {% csrf_token %}
   
           {{form.as_p}}

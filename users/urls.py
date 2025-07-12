@@ -1,30 +1,39 @@
 from django.urls import path
 from users.views import (
-    sign_up,
-    sign_in,
-    sign_out,
-    activate_user,
-    admin_dashboard,
     group_list,
     create_group,
-    assign_role,
-    view_role,
     organizer_dashboard,
     host_event_request,
     change_password,
     password_change_done,
+    #
+    SignUp,
+    ActivateUser,
+    CustomLogIN,
+    AdminDashboard,
+    ViewRole,
+    AssignRoleView,
 )
+from django.contrib.auth.views import LogoutView
+
 
 urlpatterns = [
-    path("sign-up/", sign_up, name="sign-up"),
-    path("sign-in/", sign_in, name="sign-in"),
-    path("sign-out/", sign_out, name="sign-out"),
-    path("activate/<int:user_id>/<str:token>/", activate_user, name="activate"),
-    path("admin/dashboard/", admin_dashboard, name="admin-dashboard"),
+    path("sign-up/", SignUp.as_view(), name="sign-up"),
+    path(
+        "activate/<int:user_id>/<str:token>/",
+        ActivateUser.as_view(),
+        name="activate-user",
+    ),
+    path("sign-in/", CustomLogIN.as_view(), name="sign-in"),
+    path("sign-out/", LogoutView.as_view(), name="sign-out"),
+    path("admin/dashboard/", AdminDashboard.as_view(), name="admin-dashboard"),
+    path("admin/view-role/", ViewRole.as_view(), name="view-role"),
+    path(
+        "admin/<int:user_id>/assign-role/", AssignRoleView.as_view(), name="assign-role"
+    ),
+    #
     path("admin/group-list/", group_list, name="group-list"),
     path("admin/create-group/", create_group, name="create-group"),
-    path("admin/<int:user_id>/assign-role/", assign_role, name="assign-role"),
-    path("admin/view-role/", view_role, name="view-role"),
     path("organizer/dashboard/", organizer_dashboard, name="organizer-dashboard"),
     path("host-event/", host_event_request, name="host-event"),
     #

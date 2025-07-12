@@ -163,3 +163,8 @@ LOGIN_URL = "sign-in"
 
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 ADMIN_EMAIL = config("ADMIN_EMAIL")
+
+
+LOGIN_URL = "/users/sign-in/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
