@@ -1,63 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up | EventX</title>
     {% include "links.html" %}
-</head>
-<body class="max-w-[1470px] mx-auto bg-gray-50">
-  {% include "header.html" %}
+  </head>
+  <body class="max-w-[1470px] mx-auto bg-gray-50">
+    {% include "header.html" %}
 
     <main class="min-h-[calc(100vh-460px)]">
-        <div class="max-w-lg mx-auto my-10 bg-white shadow-lg rounded-xl py-10 px-7 border border-gray-200">
-            <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Create an Account</h2>
-        
-            {% if form.non_field_errors %}
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 text-sm">
-                    <ul>
-                        {% for error in form.non_field_errors %}
-                            <li>⚠️ {{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-        
-            <form method="POST" action="" class="space-y-4">
-                {% csrf_token %}
-                {% for field in form %}
-                    <div>
-                        <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
-                            {{ field.label }}
-                        </label>
-                        {{ field }}
-        
-                        {% if field.errors %}
-                            <ul class="text-red-500 text-sm mt-1">
-                                {% for error in field.errors %}
-                                    <li>• {{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-        
-                <button type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200">
-                    Sign Up
-                </button>
+      <div
+        class="max-w-lg mx-auto my-10 bg-white shadow-lg rounded-xl py-10 px-7 border border-gray-200"
+      >
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">
+          Create an Account
+        </h2>
 
-                <p class="text-center text-sm text-gray-600 mt-4">
-                    Already have an account?
-                    <a href="{% url 'sign-in' %}" class="text-blue-600 hover:underline font-medium">
-                        Sign in here
-                    </a>
-                </p>
-            </form>
+        {% if form.non_field_errors %}
+        <div
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 text-sm"
+        >
+          <ul>
+            {% for error in form.non_field_errors %}
+            <li>⚠️ {{ error }}</li>
+            {% endfor %}
+          </ul>
         </div>
+        {% endif %}
+
+        <form method="POST" action="" class="space-y-4">
+          {% csrf_token %} {% for field in form %}
+          <div>
+            <label
+              for="{{ field.id_for_label }}"
+              class="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {{ field.label }}
+            </label>
+
+            {{ field }} {% if field.errors %}
+            <ul class="text-red-500 text-sm mt-1">
+              {% for error in field.errors %}
+              <li>• {{ error }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% endfor %}
+
+          <!-- Professional Password Visibility Toggle -->
+          <div
+            class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg border border-gray-200 mb-4"
+          >
+            <div class="flex items-center space-x-3">
+              <div
+                class="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full"
+              >
+                <i class="fas fa-shield-alt text-blue-600 text-sm"></i>
+              </div>
+              <div class="px-2">
+                <p class="text-sm font-medium text-gray-700">
+                  Password Visibility
+                </p>
+                <p class="text-xs text-gray-500">
+                  Toggle to verify your passwords
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+              onclick="toggleAllPasswords()"
+              id="toggleAllBtn"
+            >
+              <i class="fas fa-eye text-gray-600" id="toggleAllIcon"></i>
+              <span class="text-sm font-medium text-gray-700" id="toggleAllText"
+                >Show</span
+              >
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
+          >
+            Sign Up
+          </button>
+
+          <p class="text-center text-sm text-gray-600 mt-4">
+            Already have an account?
+            <a
+              href="{% url 'sign-in' %}"
+              class="text-blue-600 hover:underline font-medium"
+            >
+              Sign in here
+            </a>
+          </p>
+        </form>
+      </div>
     </main>
 
     {% include "footer.html" %}
-    
-</body>
+
+    <script>
+      let passwordsVisible = false;
+
+      function toggleAllPasswords() {
+        const passwordFields = document.querySelectorAll(
+          'input[type="password"], input[type="text"][name="pass1"], input[type="text"][name="pass2"]'
+        );
+        const toggleIcon = document.getElementById("toggleAllIcon");
+        const toggleText = document.getElementById("toggleAllText");
+
+        passwordsVisible = !passwordsVisible;
+
+        passwordFields.forEach((field) => {
+          if (field.name === "pass1" || field.name === "pass2") {
+            field.type = passwordsVisible ? "text" : "password";
+          }
+        });
+
+        if (passwordsVisible) {
+          toggleIcon.classList.remove("fa-eye");
+          toggleIcon.classList.add("fa-eye-slash");
+          toggleText.textContent = "Hide";
+        } else {
+          toggleIcon.classList.remove("fa-eye-slash");
+          toggleIcon.classList.add("fa-eye");
+          toggleText.textContent = "Show";
+        }
+      }
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleBtn = document.getElementById("toggleAllBtn");
+        toggleBtn.setAttribute("aria-label", "Toggle password visibility");
+      });
+    </script>
+  </body>
 </html>

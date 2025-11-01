@@ -1,42 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In | EventX</title>
     {% include "links.html" %}
-</head>
-<body class="max-w-[1470px] mx-auto bg-gray-50">
-  {% include "header.html" %}
+  </head>
+  <body class="max-w-[1470px] mx-auto bg-gray-50">
+    {% include "header.html" %}
 
-  <main class="min-h-[calc(100vh-460px)]">
-    <div class="bg-white border-2 rounded-2xl shadow-lg p-8 w-full max-w-md mx-auto my-10">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Login to Your Account</h2>
-  
-        {% if messages %}
-          {% for msg in messages %}
-            <div class="bg-green-200 text-green-600 p-4 rounded-md mb-4">{{ msg }}</div>
-          {% endfor %}
-        {% endif %}
-    
+    <main class="min-h-[calc(100vh-460px)]">
+      <div
+        class="bg-white border-2 rounded-2xl shadow-lg p-8 w-full max-w-md mx-auto my-10"
+      >
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+          Login to Your Account
+        </h2>
+
+        {% if messages %} {% for msg in messages %}
+        <div class="bg-green-200 text-green-600 p-4 rounded-md mb-4">
+          {{ msg }}
+        </div>
+        {% endfor %} {% endif %}
+
         <form method="POST" class="space-y-5">
-          {% csrf_token %}
-  
-          {{form.as_p}}
-  
-          <button type="submit"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200">
+          {% csrf_token %} {% for field in form %}
+          <div>
+            <label
+              for="{{ field.id_for_label }}"
+              class="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {{ field.label }}
+            </label>
+
+            {% if field.name == 'password' %}
+            <div class="relative">
+              {{ field }}
+              <button
+                type="button"
+                class="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                onclick="toggleSignInPassword()"
+              >
+                <i class="fas fa-eye text-md" id="signInPasswordIcon"></i>
+              </button>
+            </div>
+            {% else %} {{ field }} {% endif %} {% if field.errors %}
+            <ul class="text-red-500 text-sm mt-1">
+              {% for error in field.errors %}
+              <li>• {{ error }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% endfor %}
+
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200"
+          >
             Log In
           </button>
-    
+
           <p class="text-center text-sm text-gray-600 mt-4">
             Don't have an account?
-            <a href="{% url 'sign-up' %}" class="text-blue-600 hover:underline font-medium">Register here</a>
+            <a
+              href="{% url 'sign-up' %}"
+              class="text-blue-600 hover:underline font-medium"
+              >Register here</a
+            >
           </p>
         </form>
-    </div>
-  </main>
+      </div>
+    </main>
 
-  {% include "footer.html" %}
-</body>
+    {% include "footer.html" %}
+
+    <script>
+      function toggleSignInPassword() {
+        const passwordField = document.querySelector('input[name="password"]');
+        const icon = document.getElementById("signInPasswordIcon");
+
+        if (passwordField.type === "password") {
+          passwordField.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          passwordField.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        }
+      }
+    </script>
+  </body>
 </html>

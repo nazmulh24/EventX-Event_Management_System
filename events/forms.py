@@ -28,6 +28,13 @@ class StyleFormMixin:
                         "placeholder": placeholder,
                     }
                 )
+            elif isinstance(widget, forms.PasswordInput):
+                widget.attrs.update(
+                    {
+                        "class": self.default_classes + " pr-10",
+                        "placeholder": placeholder,
+                    }
+                )
             elif isinstance(widget, forms.EmailInput):
                 widget.attrs.update(
                     {
