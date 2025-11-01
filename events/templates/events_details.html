@@ -1,0 +1,203 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventDetails | EventX</title>
+
+    {% include "links.html" %}
+  </head>
+  <body class="max-w-[1470px] mx-auto bg-gray-50">
+    {% include "header.html" %}
+
+    <main class="md:w-1/2 w-full mx-auto p-3 min-h-[calc(100vh-460px)]">
+      <div class="gap-7 my-7">
+        {% csrf_token %}
+
+        <img src="{{ event.asset.url | default:'event_asset/default_img.jpg' }}" alt="Event_Asset"
+        class="w-[800px] h-[300px] rounded-md object-cover transition-all duration-300 group-hover:scale-[1.03] group-hover:shadow-xl"/>
+
+          <h2 class="font-semibold text-2xl my-2">{{event.name}}</h2>
+          <p class="p-2 mb-4">{{ event.description }}</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 text-sm my-3">
+            <!-- Event Date -->
+            <div
+              class="bg-rose-50 rounded-lg p-4 shadow-sm hover:shadow-md transition"
+              >
+              <div
+                class="flex justify-center items-center gap-2 text-white bg-gradient-to-r from-orange-400 to-orange-600 rounded-md px-3 py-1 mb-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.8"
+                  stroke="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                  />
+                </svg>
+                <span class="font-medium">Event Date</span>
+              </div>
+
+              <div
+                class="flex justify-center items-center gap-1 text-center font-medium text-gray-700"
+              >
+                {{ event.date|date:"d" }}, {{ event.date|date:"M" }}
+              </div>
+            </div>
+
+            <!-- Time -->
+            <div
+              class="bg-rose-50 rounded-lg p-4 shadow-sm hover:shadow-md transition"
+              >
+              <div
+                class="flex justify-center items-center gap-2 text-white bg-gradient-to-r from-orange-400 to-orange-600 rounded-md px-3 py-1 mb-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="font-medium">Time</span>
+              </div>
+
+              <div
+                class="flex justify-center items-center gap-1 text-center font-medium text-gray-700"
+              >
+                {{ event.time }}
+                <p>-</p>
+                {{ event.time }}
+              </div>
+            </div>
+
+            <!-- Seat Left -->
+            <div
+              class="bg-rose-50 rounded-lg p-4 shadow-sm hover:shadow-md transition"
+              >
+              <div
+                class="flex justify-center items-center gap-2 text-white bg-gradient-to-r from-orange-400 to-orange-600 rounded-md px-3 py-1 mb-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="size-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.5 6.375c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v3.026a.75.75 0 0 1-.375.65 2.249 2.249 0 0 0 0 3.898.75.75 0 0 1 .375.65v3.026c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 0 1 1.5 17.625v-3.026a.75.75 0 0 1 .374-.65 2.249 2.249 0 0 0 0-3.898.75.75 0 0 1-.374-.65V6.375Zm15-1.125a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0V6a.75.75 0 0 1 .75-.75Zm.75 4.5a.75.75 0 0 0-1.5 0v.75a.75.75 0 0 0 1.5 0v-.75Zm-.75 3a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0v-.75a.75.75 0 0 1 .75-.75Zm.75 4.5a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-.75ZM6 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 12Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <p>Seats Left</p>
+              </div>
+
+              <div class="text-center font-medium text-gray-700">{{ event.available_seats }}</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 text-sm my-3">
+            <!-- Location -->
+            <div
+              class="bg-rose-50 border border-orange-100 rounded-lg p-4 shadow-sm hover:shadow-md transition col-span-1 md:col-span-2"
+              >
+              <div
+                class="flex justify-center items-center gap-2 text-white bg-gradient-to-r from-orange-400 to-orange-600 rounded-md px-3 py-1 mb-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="font-medium">Location</span>
+              </div>
+
+              <div class="text-center font-medium text-gray-700">{{ event.location }}</div>
+            </div>
+
+            <!-- Join -->
+            <div class="flex justify-center items-center m-5 gap-3">
+              <form 
+                action="{% url 'join_event' event.id %}" 
+                method="POST" 
+                onsubmit="return confirm('Are you sure you want to join this event?');"
+                >
+                {% csrf_token %}
+                <button 
+                  type="submit" 
+                  class="bg-blue-600 font-semibold text-white p-4 rounded-lg hover:bg-blue-700"
+                >
+                  Join Event
+                </button>
+              </form>
+
+              {% if messages %}
+                <div id="toast-container" class="fixed bottom-5 right-5 space-y-3 z-50">
+                  {% for message in messages %}
+                    <div class="px-4 py-3 rounded-md shadow-lg text-white animate-slide-in transition
+                      {% if message.tags == 'success' %} bg-green-600
+                      {% elif message.tags == 'info' %} bg-blue-500
+                      {% elif message.tags == 'warning' %} bg-yellow-400 text-black
+                      {% elif message.tags == 'error' %} bg-red-600
+                      {% endif %}">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              <style>
+                @keyframes slideIn {
+                  from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                  }
+                  to {
+                    transform: translateX(0);
+                    opacity: 1;
+                  }
+                }
+                .animate-slide-in {
+                  animation: slideIn 0.4s ease-out;
+                }
+              </style>
+
+              <script>
+                setTimeout(() => {
+                  const toast = document.getElementById("toast-container");
+                  if (toast) toast.remove();
+                }, 4000);
+              </script>
+
+            </div>
+          </div>
+      </div>
+    </main>
+
+    {% include "footer.html" %}
+  </body>
+</html>
+

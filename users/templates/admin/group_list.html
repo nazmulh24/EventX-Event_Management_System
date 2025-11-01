@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groups | EventX</title>
+    {% include "links.html" %}
+</head>
+<body class="max-w-[1470px] mx-auto bg-gray-50">
+    {% include "header.html" %}
+
+    <main class="min-h-[calc(100vh-460px)]">
+        <div class="w-1/2 mx-auto m-10">
+            <h2 class="text-2xl font-bold mb-5 text-center">Groups and Permissions</h2>
+    
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="border border-gray-300 px-4 py-2">Group Name</th>
+                            <th class="border border-gray-300 px-4 py-2">Permissions</th>
+                            <th class="border border-gray-300 px-4 py-2">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for group in groups %}
+                            {% with perms=group.permissions.all %}
+                                {% for permission in perms %}
+                                    <tr class="hover:bg-blue-50 transition">
+                                        {% if forloop.first %}
+                                            <td class="border border-gray-300 p-3 font-semibold whitespace-nowrap" rowspan="{{ perms|length }}">
+                                                {{ group.name }}
+                                            </td>
+                                        {% endif %}
+                                        <td class="border border-gray-300 p-3">
+                                        {{ permission.name }}
+                                        </td>
+                                        <td class="border border-gray-300 p-3 italic">
+                                        {{ permission.codename }}
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td class="border border-gray-300 px-6 py-4 font-semibold text-gray-800 whitespace-nowrap">
+                                        {{ group.name }}
+                                        </td>
+                                        <td colspan="2" class="border border-gray-300 px-6 py-4 italic text-gray-400">
+                                        No permissions assigned
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endwith %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    {% include "footer.html" %}
+</body>
+</html>

@@ -1,0 +1,16 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = https://github.com/nazmulh24/EventX-Event_Management_System.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "m14"]
+	vscode-merge-base = origin/main
+[branch "M-14_assignment-2"]
+	vscode-merge-base = origin/main
+[branch "m18_mid_exam"]
+	vscode-merge-base = origin/main

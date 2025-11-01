@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About_Us | EventX</title>
+    {% include "links.html" %}
+</head>
+<body class = "max-w-[1470px] mx-auto bg-gray-50">
+  {% include "header.html" %}
+
+  <main class="flex justify-center px-4 py-10 min-h-[calc(100vh-460px)]">
+    <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-2xl p-10 space-y-8 text-center">
+      <h1 class="text-4xl font-bold text-gray-800">Welcome to <span class="text-green-600">EventX</span></h1>
+      
+      <p class="text-lg text-gray-600 leading-relaxed">
+        <span class="font-semibold text-green-600">EventX</span> is your intelligent platform for managing and discovering events effortlessly. From academic seminars to cultural fests, EventX streamlines everything — creation, promotion, registration, and participation — in one user-friendly place.
+      </p>
+    
+      <div class="grid md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto">
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700 mb-2">🎯 For Organizers</h2>
+          <ul class="list-disc list-inside text-gray-600 space-y-1">
+            <li>Create and manage events with a clean, intuitive form</li>
+            <li>Define categories, schedule dates, and set capacity</li>
+            <li>Track real-time participant counts and seat availability</li>
+            <li>Filter events by type, date, and category</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700 mb-2">👥 For Participants</h2>
+          <ul class="list-disc list-inside text-gray-600 space-y-1">
+            <li>Explore upcoming events based on your interests</li>
+            <li>Register quickly using mobile-friendly forms</li>
+            <li>Stay updated with schedules and event details</li>
+            <li>View available slots and live updates</li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="text-gray-700 text-base leading-relaxed space-y-4 max-w-3xl mx-auto">
+        <p>
+          We built EventX using <span class="font-medium text-blue-600">Django</span> for scalability and security, paired with <span class="font-medium text-indigo-600">Tailwind CSS</span> for sleek design and responsiveness.
+        </p>
+        <p>
+          Whether you're running a single-day workshop or managing a week-long competition, EventX is flexible, fast, and built to support both small and large-scale events.
+        </p>
+        <p class="italic text-gray-500 text-sm">This is just the beginning — new features are on the way to make your event journey even smoother.</p>
+      </div>
+    
+      <hr class="border-t border-gray-200 my-4">
+    
+      <p class="text-sm text-gray-400 italic">— Nazmul, Developer of EventX</p>
+    </div>
+  </main>
+
+  {% include "footer.html" %}
+</body>
+</html>

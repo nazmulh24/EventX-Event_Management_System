@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add_Perticipant | ExentX</title>
+
+    {% include "links.html" %}
+  </head>
+  <body class="max-w-[1470px] mx-auto bg-gray-50">
+    {% include "header.html" %}
+
+    <main class="my-10 min-h-[calc(100vh-460px)]">
+        <div class="w-1/2 mx-auto bg-white shadow-lg rounded-xl p-8">
+          <h2 class="text-2xl font-bold text-center text-orange-600 mb-6">
+            Add New User
+          </h2>
+  
+          <!-- Message -->
+          {% if messages %}
+            {% for msg in messages %}
+              <p class="text-center mb-4 text-sm px-4 py-2 rounded-md {% if msg.tags == 'success' %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %}">
+                {{ msg }}
+              </p>
+            {% endfor %}
+          {% endif %}
+  
+          <!-- Form -->
+          <form method="POST" class="space-y-5">
+            {% csrf_token %}
+            {% for field in form %}
+              <div>
+                <label for="{{ field.id_for_label }}" class="block mb-1 text-sm font-medium text-gray-700">
+                  {{ field.label }}
+                </label>
+                {{ field }}
+                {% if field.errors %}
+                  <p class="text-red-600 text-sm mt-1">{{ field.errors|striptags }}</p>
+                {% endif %}
+              </div>
+            {% endfor %}
+        
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg transition duration-200">
+              Add User
+            </button>
+          </form>
+        </div>
+    </main>
+
+    {% include "footer.html" %}
+  </body>
+</html>

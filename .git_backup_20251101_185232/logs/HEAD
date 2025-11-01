@@ -1,0 +1,75 @@
+0000000000000000000000000000000000000000 9a8e7597447e571d68c3356b9c2e0d8c5475fbfd Nazmul Hossain <snazmulhossains24@gmail.com> 1750700704 +0600	commit (initial): Initial commit for deployment
+9a8e7597447e571d68c3356b9c2e0d8c5475fbfd 0000000000000000000000000000000000000000 Nazmul Hossain <snazmulhossains24@gmail.com> 1750700805 +0600	Branch: renamed refs/heads/main to refs/heads/main
+9a8e7597447e571d68c3356b9c2e0d8c5475fbfd 9a8e7597447e571d68c3356b9c2e0d8c5475fbfd Nazmul Hossain <snazmulhossains24@gmail.com> 1750700805 +0600	Branch: renamed refs/heads/main to refs/heads/main
+9a8e7597447e571d68c3356b9c2e0d8c5475fbfd e2957346ef336aa7293d445d15b46715c6cd16df Nazmul Hossain <snazmulhossains24@gmail.com> 1750702004 +0600	commit: Ready DB for deployment
+e2957346ef336aa7293d445d15b46715c6cd16df e2957346ef336aa7293d445d15b46715c6cd16df Nazmul Hossain <snazmulhossains24@gmail.com> 1751693210 +0600	checkout: moving from main to m14
+e2957346ef336aa7293d445d15b46715c6cd16df f1c3e0619134c967f1a19635acc3596a62dc5d3b Nazmul Hossain <snazmulhossains24@gmail.com> 1751693283 +0600	commit: Start Module_14 Assignment_2
+f1c3e0619134c967f1a19635acc3596a62dc5d3b e2957346ef336aa7293d445d15b46715c6cd16df Nazmul Hossain <snazmulhossains24@gmail.com> 1751693290 +0600	checkout: moving from m14 to main
+e2957346ef336aa7293d445d15b46715c6cd16df f1c3e0619134c967f1a19635acc3596a62dc5d3b Nazmul Hossain <snazmulhossains24@gmail.com> 1751693296 +0600	merge m14: Fast-forward
+f1c3e0619134c967f1a19635acc3596a62dc5d3b f1c3e0619134c967f1a19635acc3596a62dc5d3b Nazmul Hossain <snazmulhossains24@gmail.com> 1751693313 +0600	checkout: moving from main to m14
+f1c3e0619134c967f1a19635acc3596a62dc5d3b ac3440deac54f01bdf6f3f0ce67d457c56ec10a6 Nazmul Hossain <snazmulhossains24@gmail.com> 1751701164 +0600	commit: 1. Authentication(Sign_Up, Sign_In, Sign_Out) done and also Reorganize code done...
+ac3440deac54f01bdf6f3f0ce67d457c56ec10a6 f1c3e0619134c967f1a19635acc3596a62dc5d3b Nazmul Hossain <snazmulhossains24@gmail.com> 1751701171 +0600	checkout: moving from m14 to main
+f1c3e0619134c967f1a19635acc3596a62dc5d3b ac3440deac54f01bdf6f3f0ce67d457c56ec10a6 Nazmul Hossain <snazmulhossains24@gmail.com> 1751701174 +0600	merge m14: Fast-forward
+ac3440deac54f01bdf6f3f0ce67d457c56ec10a6 ac3440deac54f01bdf6f3f0ce67d457c56ec10a6 Nazmul Hossain <snazmulhossains24@gmail.com> 1751701185 +0600	checkout: moving from main to m14
+ac3440deac54f01bdf6f3f0ce67d457c56ec10a6 b9e7c1fe4c05ff2e150c9472125cfd56ede7b296 Nazmul Hossain <snazmulhossains24@gmail.com> 1751735862 +0600	commit: Add and change many freature...almost build structure
+b9e7c1fe4c05ff2e150c9472125cfd56ede7b296 ac3440deac54f01bdf6f3f0ce67d457c56ec10a6 Nazmul Hossain <snazmulhossains24@gmail.com> 1751735871 +0600	checkout: moving from m14 to main
+ac3440deac54f01bdf6f3f0ce67d457c56ec10a6 b9e7c1fe4c05ff2e150c9472125cfd56ede7b296 Nazmul Hossain <snazmulhossains24@gmail.com> 1751735877 +0600	merge m14: Fast-forward
+b9e7c1fe4c05ff2e150c9472125cfd56ede7b296 b9e7c1fe4c05ff2e150c9472125cfd56ede7b296 Nazmul Hossain <snazmulhossains24@gmail.com> 1751735887 +0600	checkout: moving from main to m14
+b9e7c1fe4c05ff2e150c9472125cfd56ede7b296 19ea1de2d018c4a08a4516df3e1ee4ef1e3a35d6 Nazmul Hossain <snazmulhossains24@gmail.com> 1751813302 +0600	commit: 6. Maintain User-Specific Dashboards
+19ea1de2d018c4a08a4516df3e1ee4ef1e3a35d6 b9e7c1fe4c05ff2e150c9472125cfd56ede7b296 Nazmul Hossain <snazmulhossains24@gmail.com> 1751813308 +0600	checkout: moving from m14 to main
+b9e7c1fe4c05ff2e150c9472125cfd56ede7b296 19ea1de2d018c4a08a4516df3e1ee4ef1e3a35d6 Nazmul Hossain <snazmulhossains24@gmail.com> 1751813316 +0600	merge m14: Fast-forward
+19ea1de2d018c4a08a4516df3e1ee4ef1e3a35d6 19ea1de2d018c4a08a4516df3e1ee4ef1e3a35d6 Nazmul Hossain <snazmulhossains24@gmail.com> 1751813328 +0600	checkout: moving from main to m14
+19ea1de2d018c4a08a4516df3e1ee4ef1e3a35d6 8357e8f9212472933a7f55cdfd0884a332efd544 Nazmul Hossain <snazmulhossains24@gmail.com> 1751822544 +0600	commit: Organizer_dashboard+ many more
+8357e8f9212472933a7f55cdfd0884a332efd544 19ea1de2d018c4a08a4516df3e1ee4ef1e3a35d6 Nazmul Hossain <snazmulhossains24@gmail.com> 1751822550 +0600	checkout: moving from m14 to main
+19ea1de2d018c4a08a4516df3e1ee4ef1e3a35d6 8357e8f9212472933a7f55cdfd0884a332efd544 Nazmul Hossain <snazmulhossains24@gmail.com> 1751822555 +0600	merge m14: Fast-forward
+8357e8f9212472933a7f55cdfd0884a332efd544 8357e8f9212472933a7f55cdfd0884a332efd544 Nazmul Hossain <snazmulhossains24@gmail.com> 1751822570 +0600	checkout: moving from main to m14
+8357e8f9212472933a7f55cdfd0884a332efd544 040f4ae4cf93c6943463b4750294e8dd3d06d029 Nazmul Hossain <snazmulhossains24@gmail.com> 1751829695 +0600	commit: Become a Organizer and add_event done
+040f4ae4cf93c6943463b4750294e8dd3d06d029 8357e8f9212472933a7f55cdfd0884a332efd544 Nazmul Hossain <snazmulhossains24@gmail.com> 1751829701 +0600	checkout: moving from m14 to main
+8357e8f9212472933a7f55cdfd0884a332efd544 040f4ae4cf93c6943463b4750294e8dd3d06d029 Nazmul Hossain <snazmulhossains24@gmail.com> 1751829704 +0600	merge m14: Fast-forward
+040f4ae4cf93c6943463b4750294e8dd3d06d029 040f4ae4cf93c6943463b4750294e8dd3d06d029 Nazmul Hossain <snazmulhossains24@gmail.com> 1751829714 +0600	checkout: moving from main to m14
+040f4ae4cf93c6943463b4750294e8dd3d06d029 c95482ff7c4c977ed169535ab0ec8aafc42ff7ef Nazmul Hossain <snazmulhossains24@gmail.com> 1751834198 +0600	commit: Asset Imitialization done
+c95482ff7c4c977ed169535ab0ec8aafc42ff7ef 040f4ae4cf93c6943463b4750294e8dd3d06d029 Nazmul Hossain <snazmulhossains24@gmail.com> 1751834206 +0600	checkout: moving from m14 to main
+040f4ae4cf93c6943463b4750294e8dd3d06d029 c95482ff7c4c977ed169535ab0ec8aafc42ff7ef Nazmul Hossain <snazmulhossains24@gmail.com> 1751834219 +0600	merge m14: Fast-forward
+c95482ff7c4c977ed169535ab0ec8aafc42ff7ef c95482ff7c4c977ed169535ab0ec8aafc42ff7ef Nazmul Hossain <snazmulhossains24@gmail.com> 1751834231 +0600	checkout: moving from main to m14
+c95482ff7c4c977ed169535ab0ec8aafc42ff7ef bfbc385a20531b235b7e4207efd737c10c65d2d9 Nazmul Hossain <snazmulhossains24@gmail.com> 1751842752 +0600	commit: Asset done
+bfbc385a20531b235b7e4207efd737c10c65d2d9 c95482ff7c4c977ed169535ab0ec8aafc42ff7ef Nazmul Hossain <snazmulhossains24@gmail.com> 1751842758 +0600	checkout: moving from m14 to main
+c95482ff7c4c977ed169535ab0ec8aafc42ff7ef bfbc385a20531b235b7e4207efd737c10c65d2d9 Nazmul Hossain <snazmulhossains24@gmail.com> 1751842763 +0600	merge m14: Fast-forward
+bfbc385a20531b235b7e4207efd737c10c65d2d9 bfbc385a20531b235b7e4207efd737c10c65d2d9 Nazmul Hossain <snazmulhossains24@gmail.com> 1751842779 +0600	checkout: moving from main to m14
+bfbc385a20531b235b7e4207efd737c10c65d2d9 dded2454acc0cffc13a8c1243105372c3e2eb09b Nazmul Hossain <snazmulhossains24@gmail.com> 1751845806 +0600	commit: RBAC
+dded2454acc0cffc13a8c1243105372c3e2eb09b bfbc385a20531b235b7e4207efd737c10c65d2d9 Nazmul Hossain <snazmulhossains24@gmail.com> 1751845812 +0600	checkout: moving from m14 to main
+bfbc385a20531b235b7e4207efd737c10c65d2d9 dded2454acc0cffc13a8c1243105372c3e2eb09b Nazmul Hossain <snazmulhossains24@gmail.com> 1751845816 +0600	merge m14: Fast-forward
+dded2454acc0cffc13a8c1243105372c3e2eb09b dded2454acc0cffc13a8c1243105372c3e2eb09b Nazmul Hossain <snazmulhossains24@gmail.com> 1751845832 +0600	checkout: moving from main to m14
+dded2454acc0cffc13a8c1243105372c3e2eb09b 8ba1bd0ea80ed8268a46cddfe74eec36a3a26b9b Nazmul Hossain <snazmulhossains24@gmail.com> 1751849152 +0600	commit: Password Change done
+8ba1bd0ea80ed8268a46cddfe74eec36a3a26b9b dded2454acc0cffc13a8c1243105372c3e2eb09b Nazmul Hossain <snazmulhossains24@gmail.com> 1751849156 +0600	checkout: moving from m14 to main
+dded2454acc0cffc13a8c1243105372c3e2eb09b 8ba1bd0ea80ed8268a46cddfe74eec36a3a26b9b Nazmul Hossain <snazmulhossains24@gmail.com> 1751849161 +0600	merge m14: Fast-forward
+8ba1bd0ea80ed8268a46cddfe74eec36a3a26b9b 8ba1bd0ea80ed8268a46cddfe74eec36a3a26b9b Nazmul Hossain <snazmulhossains24@gmail.com> 1751849184 +0600	checkout: moving from main to m14
+8ba1bd0ea80ed8268a46cddfe74eec36a3a26b9b 97fe9400fceb19e3f16f1151a0837c21f6aed043 Nazmul Hossain <snazmulhossains24@gmail.com> 1751851170 +0600	commit: Bug Fixing
+97fe9400fceb19e3f16f1151a0837c21f6aed043 8ba1bd0ea80ed8268a46cddfe74eec36a3a26b9b Nazmul Hossain <snazmulhossains24@gmail.com> 1751851176 +0600	checkout: moving from m14 to main
+8ba1bd0ea80ed8268a46cddfe74eec36a3a26b9b 97fe9400fceb19e3f16f1151a0837c21f6aed043 Nazmul Hossain <snazmulhossains24@gmail.com> 1751851180 +0600	merge m14: Fast-forward
+97fe9400fceb19e3f16f1151a0837c21f6aed043 97fe9400fceb19e3f16f1151a0837c21f6aed043 Nazmul Hossain <snazmulhossains24@gmail.com> 1751851193 +0600	checkout: moving from main to m14
+97fe9400fceb19e3f16f1151a0837c21f6aed043 b8d91c7675d71f84e3a8c9c675e4ea5d030b1f08 Nazmul Hossain <snazmulhossains24@gmail.com> 1751857339 +0600	commit: Signal
+b8d91c7675d71f84e3a8c9c675e4ea5d030b1f08 97fe9400fceb19e3f16f1151a0837c21f6aed043 Nazmul Hossain <snazmulhossains24@gmail.com> 1751857349 +0600	checkout: moving from m14 to main
+97fe9400fceb19e3f16f1151a0837c21f6aed043 b8d91c7675d71f84e3a8c9c675e4ea5d030b1f08 Nazmul Hossain <snazmulhossains24@gmail.com> 1751857353 +0600	merge m14: Fast-forward
+b8d91c7675d71f84e3a8c9c675e4ea5d030b1f08 b8d91c7675d71f84e3a8c9c675e4ea5d030b1f08 Nazmul Hossain <snazmulhossains24@gmail.com> 1751857364 +0600	checkout: moving from main to m14
+b8d91c7675d71f84e3a8c9c675e4ea5d030b1f08 d791be262b5bdcb860441cdc36a50a0987b3054b Nazmul Hossain <snazmulhossains24@gmail.com> 1751857703 +0600	commit: Bug fixing
+d791be262b5bdcb860441cdc36a50a0987b3054b b8d91c7675d71f84e3a8c9c675e4ea5d030b1f08 Nazmul Hossain <snazmulhossains24@gmail.com> 1751857710 +0600	checkout: moving from m14 to main
+b8d91c7675d71f84e3a8c9c675e4ea5d030b1f08 d791be262b5bdcb860441cdc36a50a0987b3054b Nazmul Hossain <snazmulhossains24@gmail.com> 1751857715 +0600	merge m14: Fast-forward
+d791be262b5bdcb860441cdc36a50a0987b3054b 83a14311f1f7e6837b8fb3768ae49ac9f889baea Nazmul Hossain <snazmulhossains24@gmail.com> 1751875042 +0600	commit: Requirement.txt
+83a14311f1f7e6837b8fb3768ae49ac9f889baea 83a14311f1f7e6837b8fb3768ae49ac9f889baea Nazmul Hossain <snazmulhossains24@gmail.com> 1751875487 +0600	checkout: moving from main to M-14_assignment-2
+83a14311f1f7e6837b8fb3768ae49ac9f889baea d530e6b8a35516cc4caa4d974881335a7a2548d2 Nazmul Hossain <snazmulhossains24@gmail.com> 1751875524 +0600	commit: Complete assignment 2
+d530e6b8a35516cc4caa4d974881335a7a2548d2 83a14311f1f7e6837b8fb3768ae49ac9f889baea Nazmul Hossain <snazmulhossains24@gmail.com> 1751875590 +0600	checkout: moving from M-14_assignment-2 to main
+83a14311f1f7e6837b8fb3768ae49ac9f889baea d530e6b8a35516cc4caa4d974881335a7a2548d2 Nazmul Hossain <snazmulhossains24@gmail.com> 1751875614 +0600	merge M-14_assignment-2: Fast-forward
+d530e6b8a35516cc4caa4d974881335a7a2548d2 fbba09454bd74cf75fa5cef1beb91c2ee40cc069 Nazmul Hossain <snazmulhossains24@gmail.com> 1751876569 +0600	commit: Online DB connection
+fbba09454bd74cf75fa5cef1beb91c2ee40cc069 fed739313ee2df52791646e23594f2cd8e732ca7 Nazmul Hossain <snazmulhossains24@gmail.com> 1751879840 +0600	commit: Fix Activation email
+fed739313ee2df52791646e23594f2cd8e732ca7 e50b78cdbc53ee70d02df75babd4702ee6ae92ad Nazmul Hossain <snazmulhossains24@gmail.com> 1751899421 +0600	commit: Signal app fixed
+e50b78cdbc53ee70d02df75babd4702ee6ae92ad e50b78cdbc53ee70d02df75babd4702ee6ae92ad Nazmul Hossain <snazmulhossains24@gmail.com> 1752318249 +0600	checkout: moving from main to m18_mid_exam
+e50b78cdbc53ee70d02df75babd4702ee6ae92ad aa6ab89b3f402828a1028d97dcbfd75983ac0e76 Nazmul Hossain <snazmulhossains24@gmail.com> 1752324731 +0600	commit: M-18 .... 1. I Convert 6 function-based views to class-based views.
+aa6ab89b3f402828a1028d97dcbfd75983ac0e76 249445fa5513679e0f863d9e89994b4f47b6d75c Nazmul Hossain <snazmulhossains24@gmail.com> 1752337833 +0600	commit: Main Feature implemented...Profile+ChangePass
+249445fa5513679e0f863d9e89994b4f47b6d75c 31b1261567954ff6b952168554677f5ccff20675 Nazmul Hossain <snazmulhossains24@gmail.com> 1752339792 +0600	commit: Mid Exam Done
+31b1261567954ff6b952168554677f5ccff20675 e50b78cdbc53ee70d02df75babd4702ee6ae92ad Nazmul Hossain <snazmulhossains24@gmail.com> 1752340081 +0600	checkout: moving from m18_mid_exam to main
+e50b78cdbc53ee70d02df75babd4702ee6ae92ad 31b1261567954ff6b952168554677f5ccff20675 Nazmul Hossain <snazmulhossains24@gmail.com> 1752340097 +0600	merge m18_mid_exam: Fast-forward
+31b1261567954ff6b952168554677f5ccff20675 f9439a89e5a8274a5ce0e03cd6db1cd218b15d14 Nazmul Hossain <snazmulhossains24@gmail.com> 1752341495 +0600	commit: DataBase Connection
+f9439a89e5a8274a5ce0e03cd6db1cd218b15d14 e19bb357cf1841f4b03d5f3e9f7fb90cfcba98e7 Nazmul Hossain <snazmulhossains24@gmail.com> 1752341867 +0600	commit: Trying fix error
+e19bb357cf1841f4b03d5f3e9f7fb90cfcba98e7 6220fb4d010f564fcef46e2521554473044288cf Nazmul Hossain <snazmulhossains24@gmail.com> 1752342164 +0600	commit: Ager code a ferot gelam...karon code thik ase...deploy korte somossa hocce karon DB te somossa....
+6220fb4d010f564fcef46e2521554473044288cf 914bafcba478224a5f2d3e718cc43f5b66e47ede Nazmul Hossain <snazmulhossains24@gmail.com> 1752425563 +0600	commit: Notun Db create korsi...
+914bafcba478224a5f2d3e718cc43f5b66e47ede 914bafcba478224a5f2d3e718cc43f5b66e47ede Nazmul Hossain <nazmulhossain@Nazmuls-MacBook-Air.local> 1762001526 +0600	reset: moving to HEAD

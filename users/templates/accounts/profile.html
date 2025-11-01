@@ -1,0 +1,83 @@
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    {% include "links.html" %}
+</head>
+<body class="bg-gray-100 mt-10">
+  {% include "header.html" %}
+
+  <main class="min-h-screen py-8">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-6">
+        
+        <!-- Sidebar -->
+        <aside class="w-full md:w-64 bg-white shadow-md rounded-lg overflow-hidden">
+          <div class="p-6 border-b border-gray-200">
+            <h2 class="text-xl font-bold text-gray-800">Account Menu</h2>
+          </div>
+          <nav class="py-4 space-y-1">
+            <a href="{% url 'profile' %}" class="block py-2 px-6 text-gray-700 font-medium bg-gray-100 hover:bg-gray-200 rounded-r-full">Profile</a>
+            <a href="{% url 'edit-profile' %}" class="block py-2 px-6 text-gray-700 hover:bg-gray-100 rounded-r-full">Edit Profile</a>
+            <a href="{% url 'password-change' %}" class="block py-2 px-6 text-gray-700 hover:bg-gray-100 rounded-r-full">Change Password</a>
+          </nav>
+        </aside>
+
+        <!-- Main Content -->
+        {% block data %}
+        <section class="flex-1 bg-white shadow-md rounded-lg p-6 md:p-10">
+          <div class="flex flex-col md:flex-row items-center mb-8">
+            <img
+              src="{{ profile_img.url }}"
+              alt="Profile Picture"
+              class="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md mb-4 md:mb-0 md:mr-6"
+            />
+            <div class="text-center md:text-left">
+              <h1 class="text-3xl font-bold text-gray-800">{{ name }}</h1>
+              <p class="text-gray-600 text-sm">Software Developer</p>
+            </div>
+          </div>
+
+          <!-- Information Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Personal Info -->
+            <div>
+              <h2 class="text-lg font-semibold text-gray-700 mb-3">Personal Information</h2>
+              <ul class="space-y-2 text-gray-600">
+                <li><span class="font-medium">Email:</span> {{ email }}</li>
+                <li><span class="font-medium">Username:</span> {{ username }}</li>
+                <li><span class="font-medium">Location:</span> New York, USA</li>
+              </ul>
+            </div>
+
+            <!-- Account Info -->
+            <div>
+              <h2 class="text-lg font-semibold text-gray-700 mb-3">Account Details</h2>
+              <ul class="space-y-2 text-gray-600">
+                <li><span class="font-medium">Member Since:</span> {{ member_since| humanized_date }}</li>
+                <li><span class="font-medium">Last Login:</span> {{ last_login| humanized_date }}</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bio Section -->
+          <div class="mt-8">
+            <h2 class="text-lg font-semibold text-gray-700 mb-3">About You</h2>
+            <p class="text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-200">
+              {{ bio|default:"No bio available." }}
+            </p>
+          </div>
+        </section>
+        {% endblock data %}
+        
+      </div>
+    </div>
+  </main>
+
+  {% include "footer.html" %}
+</body>
+</html>
