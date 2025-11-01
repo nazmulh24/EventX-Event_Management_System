@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "cloudinary_storage",  # --> Cloudinary storage
+    "cloudinary",  # --> Cloudinary
     "debug_toolbar",  # --> Debug toolbar for development
     "events",  # --> app for managing events
     "users",
@@ -177,3 +179,18 @@ ADMIN_EMAIL = config("ADMIN_EMAIL")
 LOGIN_URL = "/users/sign-in/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# Cloudinary Configuration
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config(
+    cloud_name=config("CLOUDINARY_CLOUD_NAME", default=""),
+    api_key=config("CLOUDINARY_API_KEY", default=""),
+    api_secret=config("CLOUDINARY_API_SECRET", default=""),
+    secure=True,
+)
+
+# Use Cloudinary for media file storage
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"

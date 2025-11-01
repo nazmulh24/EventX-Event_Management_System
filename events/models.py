@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from cloudinary.models import CloudinaryField
 
 
 class Category(models.Model):
@@ -36,11 +37,19 @@ class Event(models.Model):
         related_name="created_events",
     )
 
-    asset = models.ImageField(
-        upload_to="event_asset",
+    # Using CloudinaryField for better image management
+    asset = CloudinaryField(
+        "image",
         blank=True,
         null=True,
-        default="event_asset/default_img.jpg",
+        folder="event_assets",
+        transformation={
+            "quality": "auto:good",
+            "fetch_format": "auto",
+            "width": 800,
+            "height": 400,
+            "crop": "fill",
+        },
     )
 
     def __str__(self):

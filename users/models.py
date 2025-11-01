@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from cloudinary.models import CloudinaryField
 
 
 class HostEventRequest(models.Model):
@@ -13,10 +14,19 @@ class HostEventRequest(models.Model):
 
 
 class CustomUser(AbstractUser):
-    profile_img = models.ImageField(
-        upload_to="profile_images",
+    # Using CloudinaryField for profile images
+    profile_img = CloudinaryField(
+        "image",
         blank=True,
-        default="profile_images/default_pi.png",
+        folder="profile_images",
+        transformation={
+            "quality": "auto:good",
+            "fetch_format": "auto",
+            "width": 400,
+            "height": 400,
+            "crop": "fill",
+            "gravity": "face",
+        },
     )
     bio = models.TextField(blank=True)
 

@@ -17,3 +17,7 @@ wheel==0.45.1
 # Added for static file serving and production WSGI
 whitenoise==6.5.0
 gunicorn==20.1.0
+
+# Cloudinary for image management
+cloudinary==1.41.0
+django-cloudinary-storage==0.3.0
