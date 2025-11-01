@@ -17,13 +17,17 @@ def notify_users_on_task_creation(sender, instance, action, pk_set, **kwargs):
         new_users = User.objects.filter(pk__in=pk_set)
 
         for user in new_users:
-            send_mail(
-                subject="Confirmation Mail",
-                message=f"Hello {user.first_name} {user.last_name},\n\nYou have successfully perticipate the event : {instance.name}.",
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[user.email],
-                fail_silently=False,
-            )
+            try:
+                send_mail(
+                    subject="Confirmation Mail",
+                    message=f"Hello {user.first_name} {user.last_name},\n\nYou have successfully participate in the event: {instance.name}.",
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[user.email],
+                    fail_silently=False,
+                )
+                print(f"✅ Email sent successfully to {user.email}")
+            except Exception as e:
+                print(f"❌ Error sending email to {user.email}: {str(e)}")
 
 
 @receiver(post_save, sender=HostEventRequest)
@@ -41,10 +45,14 @@ def send_host_request_email(sender, instance, created, **kwargs):
         📝 Motivation :
         {instance.motivation}
         """
-        send_mail(
-            subject,
-            message,
-            settings.DEFAULT_FROM_EMAIL,
-            [settings.ADMIN_EMAIL],
-            fail_silently=False,
-        )
+        try:
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.ADMIN_EMAIL],
+                fail_silently=False,
+            )
+            print(f"✅ Host request email sent successfully to admin")
+        except Exception as e:
+            print(f"❌ Error sending host request email: {str(e)}")
