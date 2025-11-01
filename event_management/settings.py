@@ -19,7 +19,7 @@ DEBUG = False
 AUTH_USER_MODEL = "users.CustomUser"
 
 
-ALLOWED_HOSTS = ["*"]  # --------------------> Change here
+ALLOWED_HOSTS = [".onrender.com", "127.0.0.1"]  # --------------------> Change here
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
     "http://127.0.0.1:8000",
@@ -29,6 +29,7 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",  # --> Middleware for debug toolbar
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -138,10 +140,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"  # -----> root a static folder connection...
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",  # -----> root a static folder connection...
 ]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"  # --> root a media folder connection..
