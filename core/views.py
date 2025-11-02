@@ -53,6 +53,10 @@ def no_permission(request):
     return render(request, "no_permission.html")
 
 
+def contact_view(request):
+    return render(request, "contact.html")
+
+
 def is_admin(user):
     return user.groups.filter(name="Admin").exists()
 
