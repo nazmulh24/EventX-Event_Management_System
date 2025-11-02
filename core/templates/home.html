@@ -325,22 +325,11 @@
       </div>
 
       <!-- Call-to-Action Section -->
-      <section class="bg-gray-50 py-20 px-4">
-        <div class="w-2/3 mx-auto">
-          <div class="bg-gradient-to-r from-orange-600 to-orange-800 rounded-3xl p-10 md:p-16 text-center relative overflow-hidden shadow-2xl">
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 opacity-20">
-              <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <pattern id="orange-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <circle cx="10" cy="10" r="2" fill="currentColor" class="text-white"/>
-                </pattern>
-                <rect width="100" height="100" fill="url(#orange-pattern)"/>
-              </svg>
-            </div>
-            
-            <!-- Content -->
-            <div class="relative z-10">
-              <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm text-white rounded-full px-6 py-3 mb-8">
+  <section class="bg-orange-500 py-12 md:py-16 px-4">
+        <div class="w-11/12 md:w-5/6 max-w-7xl mx-auto">
+          <!-- Content -->
+          <div class="text-center">
+              <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm text-white rounded-full px-6 py-3 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -356,15 +345,15 @@
               </p>
               
               <!-- Action Buttons -->
-              <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a href="{% url 'create_event' %}" class="bg-white text-orange-700 font-bold py-5 px-10 rounded-2xl hover:bg-orange-50 transition-all duration-300 hover:scale-105 shadow-xl flex items-center space-x-3 text-lg">
+              <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 md:gap-8 mt-2">
+                <a href="{% url 'create_event' %}" class="bg-white text-orange-700 font-bold py-4 md:py-5 px-8 md:px-10 rounded-2xl hover:bg-orange-50 transition-all duration-300 hover:scale-105 shadow-xl flex items-center space-x-3 text-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                   </svg>
                   <span>Create Event</span>
                 </a>
                 
-                <a href="{% url 'event' %}" class="border-3 border-white text-white font-bold py-5 px-10 rounded-2xl hover:bg-white hover:text-orange-700 transition-all duration-300 hover:scale-105 flex items-center space-x-3 text-lg">
+                <a href="{% url 'event' %}" class="border-2 border-white text-white font-bold py-4 md:py-5 px-8 md:px-10 rounded-2xl hover:bg-white hover:text-orange-700 transition-all duration-300 hover:scale-105 flex items-center space-x-3 text-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -373,19 +362,9 @@
               </div>
 
               <!-- Feature Pills -->
-              <div class="flex flex-wrap justify-center gap-3 mt-8">
-                <div class="bg-white/80 backdrop-blur-md rounded-full px-4 py-2 border border-orange-200">
-                  <span class="text-sm font-medium text-orange-700">✨ Easy Setup</span>
-                </div>
-                <div class="bg-white/80 backdrop-blur-md rounded-full px-4 py-2 border border-orange-200">
-                  <span class="text-sm font-medium text-orange-700">🚀 Instant Publishing</span>
-                </div>
-                <div class="bg-white/80 backdrop-blur-md rounded-full px-4 py-2 border border-orange-200">
-                  <span class="text-sm font-medium text-orange-700">📊 Analytics Dashboard</span>
-                </div>
+              <div class="flex flex-col items-center sm:flex-row sm:flex-wrap justify-center gap-x-2 md:gap-x-3 gap-y-4 md:gap-y-8 space-y-2 sm:space-y-0 mt-8 px-3 py-2">  
               </div>
             </div>
-          </div>
         </div>
       </section>
 
